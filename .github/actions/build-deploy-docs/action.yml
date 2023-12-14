@@ -1,0 +1,37 @@
+name: Build and Deploy Docs
+
+inputs:
+  docsProjectPath:
+    type: string
+    required: true
+    description:
+      Path to the docs project in the repository, eg. src/Docs/MyProject
+  csProjFileName:
+    type: string
+    required: true
+    description:
+      Name of the csproj file including extension, eg. MyProject.csproj
+
+runs:
+  using: composite
+  steps:
+    - uses: actions/checkout@v3
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: |
+          6.0.x
+          8.0.x
+    - name: Build
+      run: |
+        dotnet build --configuration Release ${{ inputs.docsProjectPath }}/${{inputs.csProjFileName }}
+    - name: Upload Site
+      uses: actions/upload-pages-artifact@v1
+      with:
+        path: ${{ inputs.docsProjectPath }}/_site
+    - name: Publish Site
+      uses: actions/upload-pages-artifact@v1
+      with:
+        path: ${{ inputs.docsProjectPath }}/_site
+    - name: Deploy to GitHub Pages
+      uses: actions/deploy-pages@v2
