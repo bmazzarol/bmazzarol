@@ -1,13 +1,12 @@
 name: Build and Deploy Docs
+description: Builds and deploys the Docfx site
 
 inputs:
   docsProjectPath:
-    type: string
     required: true
     description:
       Path to the docs project in the repository, eg. src/Docs/MyProject
   csProjFileName:
-    type: string
     required: true
     description:
       Name of the csproj file including extension, eg. MyProject.csproj
@@ -23,9 +22,9 @@ runs:
           6.0.x
           8.0.x
     - name: Build
+      shell: bash
       run: |
         dotnet build --configuration Release ${{ inputs.docsProjectPath }}/${{inputs.csProjFileName }}
-      shell: bash
     - name: Upload Site
       uses: actions/upload-pages-artifact@v1
       with:
