@@ -25,6 +25,7 @@ runs:
     - name: Build
       run: |
         dotnet build --configuration Release ${{ inputs.docsProjectPath }}/${{inputs.csProjFileName }}
+      shell: bash
     - name: Upload Site
       uses: actions/upload-pages-artifact@v1
       with:
