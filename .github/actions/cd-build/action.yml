@@ -31,5 +31,6 @@ runs:
       shell: bash
       run: |
         dotnet nuget push **\*.nupkg \
-          --api-key ${{ inputs.version }}
-          --source https://api.nuget.org/v3/index.json --skip-duplicate
+          --api-key ${{ inputs.nugetKey }} \
+          --source https://api.nuget.org/v3/index.json \
+          --skip-duplicate
