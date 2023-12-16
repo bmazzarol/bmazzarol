@@ -17,5 +17,8 @@
       - name: Run Markdownlint
         shell: bash
         run: |
+          shopt -s globstar
+          shopt -s nullglob
+          
           npm i
-          npx markdownlint-cli2  "${{ inputs.targetMdFiles }}"
+          npx markdownlint-cli2 $(echo "${{ inputs.targetMdFiles }}" | tr '\n' ' ')
