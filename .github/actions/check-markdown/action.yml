@@ -18,4 +18,4 @@
         shell: bash
         run: |
           npm i
-          npx markdownlint-cli2  ${{ input.targetMdFiles }}
+          npx markdownlint-cli2  ${{ inputs.targetMdFiles }}
