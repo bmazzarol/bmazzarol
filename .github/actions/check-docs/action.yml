@@ -1,0 +1,27 @@
+name: Check Docs
+description: Checks the Docfx site
+
+inputs:
+  docsProjectPath:
+    required: true
+    description:
+      Path to the docs project in the repository, eg. src/Docs/MyProject
+  csProjFileName:
+    required: true
+    description:
+      Name of the csproj file including extension, eg. MyProject.csproj
+
+runs:
+  using: composite
+  steps:
+    - uses: actions/checkout@v3
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: |
+          6.0.x
+          8.0.x
+    - name: Build
+      shell: bash
+      run: |
+        dotnet build --configuration Release ${{ inputs.docsProjectPath }}/${{inputs.csProjFileName }}
