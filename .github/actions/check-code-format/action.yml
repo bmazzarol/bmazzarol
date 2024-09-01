@@ -9,11 +9,6 @@ runs:
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: 8.0.x
-    - uses: actions/cache@v3
-      with:
-        path: ${{ github.workspace }}\.nuget\packages
-        key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj') }}
-        restore-keys: ${{ runner.os }}-nuget-
     - name: Install dotnet Tooling
       shell: bash
       run: dotnet tool restore

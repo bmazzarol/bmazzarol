@@ -28,12 +28,7 @@ runs:
         distribution: 'zulu'
     - uses: actions/checkout@v3
       with:
-        fetch-depth: 0    
-    - uses: actions/cache@v3
-      with:
-        path: ${{ github.workspace }}\.nuget\packages
-        key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj') }}
-        restore-keys: ${{ runner.os }}-nuget-
+        fetch-depth: 0
     - name: Cache SonarCloud packages
       uses: actions/cache@v3
       with:
