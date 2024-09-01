@@ -61,7 +61,7 @@ runs:
           /d:sonar.token="${{ inputs.sonarToken }}" `
           /d:sonar.host.url="https://sonarcloud.io" `
           /d:sonar.cs.dotcover.reportsPaths=dotCover.Output.html `
-          /d:sonar.cs.vstest.reportsPaths=**/test-results.trx
+          /d:sonar.cs.vstest.reportsPaths=**/test-results.trx `
           /d:sonar.scanner.scanAll=false
         
         dotnet dotcover test `
