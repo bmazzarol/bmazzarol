@@ -20,7 +20,12 @@ runs:
       with:
         dotnet-version: |
           6.0.x
-          8.0.x
+          8.0.x    
+    - uses: actions/cache@v3
+      with:
+        path: ${{ github.workspace }}\.nuget\packages
+        key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj') }}
+        restore-keys: ${{ runner.os }}-nuget-
     - name: Build
       shell: bash
       run: |
