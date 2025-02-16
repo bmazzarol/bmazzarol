@@ -29,9 +29,5 @@ runs:
       uses: actions/upload-pages-artifact@v3
       with:
         path: ${{ inputs.docsProjectPath }}/_site
-    - name: Publish Site
-      uses: actions/upload-pages-artifact@v3
-      with:
-        path: ${{ inputs.docsProjectPath }}/_site
     - name: Deploy to GitHub Pages
       uses: actions/deploy-pages@v4
