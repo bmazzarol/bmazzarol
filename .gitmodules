@@ -1,0 +1,18 @@
+[submodule "projects/dotnet/Tuxedo"]
+	path = projects/dotnet/Tuxedo
+	url = https://github.com/bmazzarol/Tuxedo.git
+[submodule "projects/dotnet/Bunsen-Burner"]
+	path = projects/dotnet/Bunsen-Burner
+	url = https://github.com/bmazzarol/Bunsen-Burner.git
+[submodule "projects/dotnet/Eon"]
+	path = projects/dotnet/Eon
+	url = https://github.com/bmazzarol/Eon.git
+[submodule "projects/dotnet/Http-BuildR"]
+	path = projects/dotnet/Http-BuildR
+	url = https://github.com/bmazzarol/Http-BuildR.git
+[submodule "projects/dotnet/Icicle"]
+	path = projects/dotnet/Icicle
+	url = https://github.com/bmazzarol/Icicle.git
+[submodule "projects/dotnet/docfx.result-snippets"]
+	path = projects/dotnet/docfx.result-snippets
+	url = https://github.com/bmazzarol/docfx.result-snippets.git
