@@ -16,3 +16,6 @@
 [submodule "projects/dotnet/docfx.result-snippets"]
 	path = projects/dotnet/docfx.result-snippets
 	url = https://github.com/bmazzarol/docfx.result-snippets.git
+[submodule "projects/dotnet/Fluidic"]
+	path = projects/dotnet/Fluidic
+	url = https://github.com/bmazzarol/Fluidic.git
