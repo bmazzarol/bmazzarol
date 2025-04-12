@@ -1,21 +1,21 @@
-﻿  name: Check Markdown
-  description: Runs markdownlint over the md files
-  
-  inputs: 
-    targetMdFiles:
-      description: globs that target the required md files to lint
-      required: true
-  
-  runs:
-    using: composite
-    steps:
-      - uses: actions/checkout@v4
-      - name: Use Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 16.x
-      - name: Run Markdownlint
-        shell: bash
-        run: |
-          npm i
-          npx markdownlint-cli2 ${{ inputs.targetMdFiles }}
+﻿name: Check Markdown
+description: Runs markdownlint over the md files
+
+inputs:
+  targetMdFiles:
+    description: globs that target the required md files to lint
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - uses: actions/checkout@v4
+    - name: Use Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: 16.x
+    - name: Run Markdownlint
+      shell: bash
+      run: |
+        npm i
+        npx markdownlint-cli2 ${{ inputs.targetMdFiles }}
