@@ -84,6 +84,7 @@ runs:
           **/test-results.trx
           **/report.xml
           **/coverage.xml
+          **/*.log
     - name: Publish Test Results
       uses: EnricoMi/publish-unit-test-result-action@v2
       if: ${{ always() && github.event_name == 'pull_request' }}
