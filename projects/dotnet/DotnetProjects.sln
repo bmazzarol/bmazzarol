@@ -88,6 +88,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fluidic.Sample", "Fluidic\F
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fluidic.Tests", "Fluidic\Fluidic.Tests\Fluidic.Tests.csproj", "{5C36E769-5EFD-4376-B646-DA1C5347719B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Polyglot.Notebook.Docfx.Plugin", "Polyglot.Notebook.Docfx.Plugin\Polyglot.Notebook.Docfx.Plugin\Polyglot.Notebook.Docfx.Plugin.csproj", "{BEFC6D60-3A24-41ED-B2DA-883742F702A5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Polyglot.Notebook.Docfx.Plugin", "Polyglot.Notebook.Docfx.Plugin", "{52CE6593-851A-4241-A275-4DEF2356B712}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Polyglot.Notebook.Docfx.Plugin.Tests", "Polyglot.Notebook.Docfx.Plugin\Polyglot.Notebook.Docfx.Plugin.Tests\Polyglot.Notebook.Docfx.Plugin.Tests.csproj", "{55C1DE7C-3E54-413B-AC9D-29BA039154B6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Polyglot.Notebook.Docfx.Plugin.Docs", "Polyglot.Notebook.Docfx.Plugin\Polyglot.Notebook.Docfx.Plugin.Docs\Polyglot.Notebook.Docfx.Plugin.Docs.csproj", "{A4662172-DF20-4DF7-90EA-44C667802FB0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -125,6 +133,9 @@ Global
 		{079F456C-8046-431F-837C-FCCB8782AC56} = {C31F4008-EBF4-4D92-A9EA-BB372AD9F24D}
 		{E21DF8D3-FB2C-4CDB-858E-9805EDD3CE76} = {C31F4008-EBF4-4D92-A9EA-BB372AD9F24D}
 		{5C36E769-5EFD-4376-B646-DA1C5347719B} = {C31F4008-EBF4-4D92-A9EA-BB372AD9F24D}
+		{BEFC6D60-3A24-41ED-B2DA-883742F702A5} = {52CE6593-851A-4241-A275-4DEF2356B712}
+		{55C1DE7C-3E54-413B-AC9D-29BA039154B6} = {52CE6593-851A-4241-A275-4DEF2356B712}
+		{A4662172-DF20-4DF7-90EA-44C667802FB0} = {52CE6593-851A-4241-A275-4DEF2356B712}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{D1576585-9507-43D1-A55B-2B91921E523A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -235,5 +246,17 @@ Global
 		{5C36E769-5EFD-4376-B646-DA1C5347719B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5C36E769-5EFD-4376-B646-DA1C5347719B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5C36E769-5EFD-4376-B646-DA1C5347719B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BEFC6D60-3A24-41ED-B2DA-883742F702A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BEFC6D60-3A24-41ED-B2DA-883742F702A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BEFC6D60-3A24-41ED-B2DA-883742F702A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BEFC6D60-3A24-41ED-B2DA-883742F702A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55C1DE7C-3E54-413B-AC9D-29BA039154B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55C1DE7C-3E54-413B-AC9D-29BA039154B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55C1DE7C-3E54-413B-AC9D-29BA039154B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55C1DE7C-3E54-413B-AC9D-29BA039154B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A4662172-DF20-4DF7-90EA-44C667802FB0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4662172-DF20-4DF7-90EA-44C667802FB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4662172-DF20-4DF7-90EA-44C667802FB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4662172-DF20-4DF7-90EA-44C667802FB0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

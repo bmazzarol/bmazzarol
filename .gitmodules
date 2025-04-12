@@ -19,3 +19,6 @@
 [submodule "projects/dotnet/Fluidic"]
 	path = projects/dotnet/Fluidic
 	url = https://github.com/bmazzarol/Fluidic.git
+[submodule "projects/dotnet/Polyglot.Notebook.Docfx.Plugin"]
+	path = projects/dotnet/Polyglot.Notebook.Docfx.Plugin
+	url = https://github.com/bmazzarol/Polyglot.Notebook.Docfx.Plugin.git
