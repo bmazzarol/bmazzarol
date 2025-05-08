@@ -16,9 +16,9 @@
 [submodule "projects/dotnet/docfx.result-snippets"]
 	path = projects/dotnet/docfx.result-snippets
 	url = https://github.com/bmazzarol/docfx.result-snippets.git
-[submodule "projects/dotnet/Fluidic"]
-	path = projects/dotnet/Fluidic
-	url = https://github.com/bmazzarol/Fluidic.git
+[submodule "projects/dotnet/Cutout"]
+	path = projects/dotnet/Cutout
+	url = https://github.com/bmazzarol/Cutout.git
 [submodule "projects/dotnet/Polyglot.Notebook.Docfx.Plugin"]
 	path = projects/dotnet/Polyglot.Notebook.Docfx.Plugin
 	url = https://github.com/bmazzarol/Polyglot.Notebook.Docfx.Plugin.git

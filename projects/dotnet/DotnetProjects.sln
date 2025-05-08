@@ -80,13 +80,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tuxedo.Examples", "Tuxedo\T
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tuxedo.Tests", "Tuxedo\Tuxedo.Tests\Tuxedo.Tests.csproj", "{87A3F219-80AE-4323-A849-AB1DCA6234BB}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Fluidic", "Fluidic", "{C31F4008-EBF4-4D92-A9EA-BB372AD9F24D}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Cutout", "Cutout", "{C31F4008-EBF4-4D92-A9EA-BB372AD9F24D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fluidic", "Fluidic\Fluidic\Fluidic.csproj", "{079F456C-8046-431F-837C-FCCB8782AC56}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cutout", "Cutout\Cutout\Cutout.csproj", "{079F456C-8046-431F-837C-FCCB8782AC56}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fluidic.Sample", "Fluidic\Fluidic.Sample\Fluidic.Sample.csproj", "{E21DF8D3-FB2C-4CDB-858E-9805EDD3CE76}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cutout.Sample", "Cutout\Cutout.Sample\Cutout.Sample.csproj", "{E21DF8D3-FB2C-4CDB-858E-9805EDD3CE76}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fluidic.Tests", "Fluidic\Fluidic.Tests\Fluidic.Tests.csproj", "{5C36E769-5EFD-4376-B646-DA1C5347719B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cutout.Tests", "Cutout\Cutout.Tests\Cutout.Tests.csproj", "{5C36E769-5EFD-4376-B646-DA1C5347719B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Polyglot.Notebook.Docfx.Plugin", "Polyglot.Notebook.Docfx.Plugin\Polyglot.Notebook.Docfx.Plugin\Polyglot.Notebook.Docfx.Plugin.csproj", "{BEFC6D60-3A24-41ED-B2DA-883742F702A5}"
 EndProject
