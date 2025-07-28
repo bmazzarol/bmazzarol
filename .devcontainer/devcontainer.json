@@ -13,8 +13,37 @@
         "ms-dotnettools.csharp",
         "ms-dotnettools.vscode-dotnet-runtime",
         "ms-dotnettools.csdevkit",
+        "csharpier.csharpier-vscode",
         "github.copilot"
       ]
+    },
+    "codespaces": {
+      "repositories": {
+        "bmazzarol/Tuxedo": {
+          "permissions": "write-all"
+        },
+        "bmazzarol/Bunsen-Burner": {
+          "permissions": "write-all"
+        },
+        "bmazzarol/Eon": {
+          "permissions": "write-all"
+        },
+        "bmazzarol/Http-BuildR": {
+          "permissions": "write-all"
+        },
+        "bmazzarol/Icicle": {
+          "permissions": "write-all"
+        },
+        "bmazzarol/docfx.result-snippets": {
+          "permissions": "write-all"
+        },
+        "bmazzarol/Cutout": {
+          "permissions": "write-all"
+        },
+        "bmazzarol/Polyglot.Notebook.Docfx.Plugin": {
+          "permissions": "write-all"
+        }
+      }
     }
   }
 }

@@ -1,3 +1,12 @@
 {
-    "dotnet.defaultSolution": "projects/dotnet/DotnetProjects.sln"
+    "dotnet.defaultSolution": "projects/dotnet/DotnetProjects.sln",
+    // Set the default
+    "editor.formatOnSave": false,
+    // Enable per-language
+    "[csharp]": {
+        "editor.formatOnSave": true
+    },
+    "[xml]": {
+        "editor.formatOnSave": true
+    }
 }
