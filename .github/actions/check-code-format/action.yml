@@ -14,4 +14,4 @@ runs:
       run: dotnet tool restore
     - name: Check format
       shell: bash
-      run: dotnet csharpier . --check
+      run: dotnet csharpier check .
