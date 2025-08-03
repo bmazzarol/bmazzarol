@@ -96,6 +96,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Polyglot.Notebook.Docfx.Plu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Polyglot.Notebook.Docfx.Plugin.Docs", "Polyglot.Notebook.Docfx.Plugin\Polyglot.Notebook.Docfx.Plugin.Docs\Polyglot.Notebook.Docfx.Plugin.Docs.csproj", "{A4662172-DF20-4DF7-90EA-44C667802FB0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cutout.Docs", "Cutout\Cutout.Docs\Cutout.Docs.csproj", "{C210F033-553E-46F5-9298-150798DB6A05}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -136,6 +138,7 @@ Global
 		{BEFC6D60-3A24-41ED-B2DA-883742F702A5} = {52CE6593-851A-4241-A275-4DEF2356B712}
 		{55C1DE7C-3E54-413B-AC9D-29BA039154B6} = {52CE6593-851A-4241-A275-4DEF2356B712}
 		{A4662172-DF20-4DF7-90EA-44C667802FB0} = {52CE6593-851A-4241-A275-4DEF2356B712}
+		{C210F033-553E-46F5-9298-150798DB6A05} = {C31F4008-EBF4-4D92-A9EA-BB372AD9F24D}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{D1576585-9507-43D1-A55B-2B91921E523A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -258,5 +261,9 @@ Global
 		{A4662172-DF20-4DF7-90EA-44C667802FB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A4662172-DF20-4DF7-90EA-44C667802FB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A4662172-DF20-4DF7-90EA-44C667802FB0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C210F033-553E-46F5-9298-150798DB6A05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C210F033-553E-46F5-9298-150798DB6A05}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C210F033-553E-46F5-9298-150798DB6A05}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C210F033-553E-46F5-9298-150798DB6A05}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
