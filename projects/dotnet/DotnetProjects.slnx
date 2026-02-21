@@ -1,0 +1,71 @@
+<Solution>
+  <Folder Name="/Bunsen-Burner/">
+    <Project Path="Bunsen-Burner/BunsenBurner.Docs/BunsenBurner.Docs.csproj" />
+    <Project Path="Bunsen-Burner/BunsenBurner.Tests/BunsenBurner.Tests.csproj" />
+    <Project Path="Bunsen-Burner/BunsenBurner/BunsenBurner.csproj" />
+  </Folder>
+  <Folder Name="/Cutout/">
+    <Project Path="Cutout/Cutout.Docs/Cutout.Docs.csproj" />
+    <Project Path="Cutout/Cutout.Sample/Cutout.Sample.csproj" />
+    <Project Path="Cutout/Cutout.Tests/Cutout.Tests.csproj" />
+    <Project Path="Cutout/Cutout/Cutout.csproj" />
+  </Folder>
+  <Folder Name="/docfx.result-snippets/">
+    <Project Path="docfx.result-snippets/Docfx.ResultSnippets.Docs/Docfx.ResultSnippets.Docs.csproj" />
+    <Project Path="docfx.result-snippets/Docfx.ResultSnippets.Tests/Docfx.ResultSnippets.Tests.csproj" />
+    <Project Path="docfx.result-snippets/Docfx.ResultSnippets/Docfx.ResultSnippets.csproj" />
+  </Folder>
+  <Folder Name="/Eon/">
+    <Project Path="Eon/Eon.Docs/Eon.Docs.csproj" />
+    <Project Path="Eon/Eon.Tests/Eon.Tests.csproj" />
+    <Project Path="Eon/Eon/Eon.csproj" />
+  </Folder>
+  <Folder Name="/Http-BuildR/">
+    <Project Path="Http-BuildR/src/Docs/HttpBuildR.Docs/HttpBuildR.Docs.csproj" />
+  </Folder>
+  <Folder Name="/Http-BuildR/Request/">
+    <Project Path="Http-BuildR/src/Request/HttpBuildR.Request.Tests/HttpBuildR.Request.Tests.csproj" />
+    <Project Path="Http-BuildR/src/Request/HttpBuildR.Request/HttpBuildR.Request.csproj" />
+  </Folder>
+  <Folder Name="/Http-BuildR/Response/">
+    <Project Path="Http-BuildR/src/Response/HttpBuildR.Response.Tests/HttpBuildR.Response.Tests.csproj" />
+    <Project Path="Http-BuildR/src/Response/HttpBuildR.Response/HttpBuildR.Response.csproj" />
+  </Folder>
+  <Folder Name="/Icicle/">
+    <Project Path="Icicle/Icicle.Benchmarks/Icicle.Benchmarks.csproj" />
+    <Project Path="Icicle/Icicle.Docs/Icicle.Docs.csproj" />
+    <Project Path="Icicle/Icicle.Tests/Icicle.Tests.csproj" />
+    <Project Path="Icicle/Icicle/Icicle.csproj" />
+  </Folder>
+  <Folder Name="/Pasted/">
+    <Project Path="Pasted/Pasted.Docs/Pasted.Docs.csproj" />
+    <Project Path="Pasted/Pasted.Sample/Pasted.Sample.csproj" />
+    <Project Path="Pasted/Pasted.Tests/Pasted.Tests.csproj" />
+    <Project Path="Pasted/Pasted/Pasted.csproj" />
+  </Folder>
+  <Folder Name="/Polyglot.Notebook.Docfx.Plugin/">
+    <Project Path="Polyglot.Notebook.Docfx.Plugin/Polyglot.Notebook.Docfx.Plugin.Docs/Polyglot.Notebook.Docfx.Plugin.Docs.csproj" />
+    <Project Path="Polyglot.Notebook.Docfx.Plugin/Polyglot.Notebook.Docfx.Plugin.Tests/Polyglot.Notebook.Docfx.Plugin.Tests.csproj" />
+    <Project Path="Polyglot.Notebook.Docfx.Plugin/Polyglot.Notebook.Docfx.Plugin/Polyglot.Notebook.Docfx.Plugin.csproj" />
+  </Folder>
+  <Folder Name="/Quacker/">
+    <Project Path="Quacker/Quacker.Tests/Quacker.Tests.csproj" />
+    <Project Path="Quacker/Quacker/Quacker.csproj" />
+  </Folder>
+  <Folder Name="/Shared/">
+    <File Path=".globalconfig.shared" />
+    <File Path="Common.Docs.props" />
+    <File Path="Common.Release.props" />
+    <File Path="Common.Test.props" />
+    <File Path="Directory.Packages.props" />
+  </Folder>
+  <Folder Name="/Shared/scripts/">
+    <File Path="scripts/sync-global-config.ps1" />
+  </Folder>
+  <Folder Name="/Tuxedo/">
+    <Project Path="Tuxedo/Tuxedo.Docs/Tuxedo.Docs.csproj" />
+    <Project Path="Tuxedo/Tuxedo.Examples/Tuxedo.Examples.csproj" />
+    <Project Path="Tuxedo/Tuxedo.SourceGenerator.Tests/Tuxedo.SourceGenerator.Tests.csproj" />
+    <Project Path="Tuxedo/Tuxedo.SourceGenerator/Tuxedo.SourceGenerator.csproj" />
+  </Folder>
+</Solution>
