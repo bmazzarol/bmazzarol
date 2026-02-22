@@ -1,5 +1,6 @@
 ﻿<Project>
   <PropertyGroup>
+    <LangVersion>default</LangVersion>
     <BuiltInMonoRepo>true</BuiltInMonoRepo>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
     <CentralPackageTransitivePinningEnabled>true</CentralPackageTransitivePinningEnabled>
