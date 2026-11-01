@@ -64,7 +64,7 @@ so what you see locally is exactly what will ship.
 
 | Area | Behaviour |
 | --- | --- |
-| Typography | Inter for prose, JetBrains Mono for code, both self-hosted (~67 KB total) |
+| Typography | Inter for prose, JetBrains Mono for code, both self-hosted (68 KB of fonts) |
 | Article | single column, capped at 70 characters |
 | Masthead | the project logo floats beside the intro copy, not on a line of its own |
 | Navigation | transparent bar, 1.75rem logo, thin bottom rule |
@@ -81,8 +81,8 @@ padding is trimmed, the artwork is scaled so its longest side fills a 128x128
 canvas, and it is centred with 6px of breathing room. Without this, the glue
 stick renders half the size of the notebook and the navbar looks uneven.
 
-Canonical icons live in `docs/theme/images` and are copied into each project's
-`<Docs>/images` by `docs apply`:
+Canonical icons live in `docs/theme/images` and `docs apply` copies a project's
+navbar logo from that directory into its docs images folder:
 
 ```bash
 ./scripts/normalise-icons.py <png...> -o docs/theme/images

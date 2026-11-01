@@ -27,6 +27,7 @@ page, worked examples, and an API reference generated from the source.
 
 - [Documentation style guide](articles/documentation-style-guide.md) — the voice, structure and checks every page is held to.
 - [The theme](articles/theme.md) — how the sites are styled, and how a change is previewed before it ships.
+- [Shared CI](articles/shared-ci.md) — how the workflows, hooks and docfx settings are kept identical in every repository.
 
 ## Elsewhere
 

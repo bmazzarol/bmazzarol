@@ -29,3 +29,5 @@ items:
         href: articles/documentation-style-guide.md
       - name: Theme
         href: articles/theme.md
+      - name: Shared CI
+        href: articles/shared-ci.md

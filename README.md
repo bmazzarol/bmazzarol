@@ -33,5 +33,15 @@ such as using the same linters, formatters, and CI/CD pipelines.
 | [docfx result snippets](https://github.com/bmazzarol/docfx.result-snippets) | executed output in a docfx page | [docs](https://bmazzarol.github.io/docfx.result-snippets/) |
 | [Quacker](https://github.com/bmazzarol/Quacker) | compile time duck typing | - |
 
+## Tooling
+
+The CI templates, the docfx theme, the hooks and the documentation style guide
+all live in this repository and are copied out to the projects:
+
+- [Documentation style guide](https://bmazzarol.github.io/bmazzarol/articles/documentation-style-guide.html)
+- [The theme](https://bmazzarol.github.io/bmazzarol/articles/theme.html)
+- [Shared CI](https://bmazzarol.github.io/bmazzarol/articles/shared-ci.html)
+- `./scripts/ci-sync.sh` - writes the shared configuration into every project
+
 Contributing is still expected to be done on a per-project basis, using the
 well-known GitHub workflow.
