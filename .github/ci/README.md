@@ -42,6 +42,10 @@ here too:
 - `MD041` (first line must be a heading) off - every landing page starts with the
   project logo, then the title.
 
+The root repo runs the same lint over its own prose with
+`.github/workflows/check-markdown.yml`. It excludes `projects/**`, because each
+submodule lints itself in its own CI.
+
 `.github/ci/config/husky/` holds the `commit-msg` and `pre-commit` hooks copied
 into each repo's `.husky/`. The `task-runner.json` stays per-repo because its
 globs and docs paths differ.

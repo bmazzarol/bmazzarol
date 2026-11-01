@@ -3,7 +3,7 @@
 ## Voice
 
 | Prefer | Avoid |
-|---|---|
+| --- | --- |
 | "you pass a strategy" | "the user passes a strategy" |
 | "the generator emits the code" | "the code is emitted by the generator" |
 | "runs every 15 minutes" | "is configured with a cadence of fifteen minutes" |

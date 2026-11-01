@@ -1,0 +1,23 @@
+name: Check Markdown
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "**/*.md"
+      - .github/workflows/check-markdown.yml
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    permissions:
+      statuses: write
+    steps:
+      - uses: bmazzarol/bmazzarol/.github/actions/check-markdown@main
+        with:
+          # projects/ are submodules with their own Check Markdown workflow, so
+          # the root repo only lints its own prose.
+          targetMdFiles: '"**/*.md" "!projects/**" "!node_modules/**" "!LICENSE.md"'

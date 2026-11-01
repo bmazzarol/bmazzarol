@@ -27,7 +27,7 @@ after the C# build.
 ## Useful global metadata
 
 | Key | Effect |
-|---|---|
+| --- | --- |
 | `_appName` | text next to the logo in the navbar |
 | `_appTitle` | appended to every page title |
 | `_appLogoPath` | logo image (relative to the docs folder) |

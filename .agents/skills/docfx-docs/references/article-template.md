@@ -2,7 +2,7 @@
 
 ## Landing page (`index.md`)
 
-~~~~markdown
+````markdown
 # <Library name>
 
 ![<Library name>](images/<icon>.png)
@@ -35,10 +35,11 @@ dotnet add package <package>
 
 - [Concept A](articles/concept-a.md)
 - [Concept B](articles/concept-b.md)
-~~~~
+````
 
 The concept and getting started templates nest fine because they contain no code
-fences of their own; the landing page uses tilde fences so the install block can
+fences of their own; the landing page opens with four backticks so the install
+block can sit inside it.
 sit inside it.
 
 ## Concept article (`articles/<concept>.md`)
@@ -63,7 +64,7 @@ sit inside it.
 
 ## Getting started (`articles/getting-started.md`)
 
-~~~~markdown
+````markdown
 # Getting started
 
 ## Install
@@ -79,6 +80,6 @@ dotnet add package <name>
 ## Next
 
 <two or three links, in the order a reader will need them>
-~~~~
+````
 
 Every template keeps the same order: what, then how, then the edges.

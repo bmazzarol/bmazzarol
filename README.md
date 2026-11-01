@@ -18,5 +18,5 @@ chores much easier for me.
 It also allows me to enforce a degree of consistency across all of my projects,
 such as using the same linters, formatters, and CI/CD pipelines.
 
-Contributing is still expected to be done on a per-project basis, using the 
+Contributing is still expected to be done on a per-project basis, using the
 well-known GitHub workflow.
