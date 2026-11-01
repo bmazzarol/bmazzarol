@@ -235,6 +235,13 @@ footer {
   font-size: 0.85rem;
 }
 
+/* the project logo sits on the line directly under the page title */
+
+article > p:first-of-type img {
+  width: 48px;
+  height: 48px;
+}
+
 /* ------------------------------------------------- project list (profile site) */
 
 article li img {

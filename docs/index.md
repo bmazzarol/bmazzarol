@@ -1,5 +1,7 @@
 # Ben Mazzarol
 
+![Ben Mazzarol monogram](images/monogram.svg)
+
 I build small .NET libraries and tools that solve problems I actually ran into.
 Each project below is its own repository, documented with
 [docfx](https://dotnet.github.io/docfx/) and published to GitHub Pages on this

@@ -32,6 +32,25 @@ api/                generated reference, not written by hand
 The table of contents is a learning path, not a file listing. Order it by the
 order a person needs to learn things, not by the order the source files appear.
 
+The landing page has a fixed shape:
+
+```text
+# Cutout
+
+![Cutout](images/scissors-icon.png)
+
+**Source generated templating that costs nothing.**
+
+Cutout is a source generator for .NET that emits correctly indented code from a
+template, so you never build generated strings by hand.
+
+dotnet add package Cutout
+```
+
+The logo sits on the line below the title at 48px. It is not repeated anywhere
+else on the page: the navbar and the favicon already carry it. Badge shields do
+not belong here; they are for the README.
+
 ## Voice
 
 - Write in the second person: "you pass a strategy", not "the user passes a
