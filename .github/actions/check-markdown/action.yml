@@ -5,7 +5,7 @@ inputs:
   targetMdFiles:
     description: globs that target the required md files to lint
     required: false
-    default: '"**/*.md" "!node_modules/**" "!LICENSE.md" "!**/__examples__/**" "!**/_site/**"'
+    default: '"**/*.md" "!**/node_modules/**" "!LICENSE.md" "!**/__examples__/**" "!**/_site/**" "!.github/**" "!**/*.verified.md" "!**/*.ipynb.md"'
 
 runs:
   using: composite
@@ -20,7 +20,8 @@ runs:
       run: |
         # repos without a package.json have no local dev dependencies; npx
         # fetches markdownlint-cli2 on demand in that case.
-        # __examples__ and _site are generated output, not prose to lint.
+        # __examples__, _site and *.verified.md are generated output, and
+        # .github holds issue templates - none of it is documentation to lint.
         if [ -f package.json ]; then
           npm i
         fi
