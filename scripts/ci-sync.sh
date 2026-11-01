@@ -334,7 +334,11 @@ cmd_workflows() {
       [[ -f "$tpl" ]] || continue
       name="$(basename "$tpl")"
       # the docfx metadata file is applied by `docs apply`, not copied to a repo root
+      # root-only sources of truth: the landing copy is applied to each repo's
+      # README/docs page by scripts/apply-landing-copy.py, the docfx metadata
+      # is written into docfx.json by `docs apply`
       [[ "$name" == "docfx-global-metadata.json" ]] && continue
+      [[ "$name" == "landing-copy.json" ]] && continue
       if [[ "$tpl" == "$TEMPLATES"/* ]]; then
         docs="$(repo_setting "$r" docsProjectPath)"
         if [[ ("$name" == "check-docs.yml" || "$name" == "build-deploy-docs.yml") && ( -z "$docs" || "$docs" == "null" ) ]]; then
@@ -367,9 +371,8 @@ cmd_workflows() {
       printf '  %-32s templates written\n' "$r"
       if [[ "$commit" == "--commit" ]]; then
         git -C "$ROOT/$path" add .github/workflows
-        for cfg in "$SHARED_CONFIG"/.* "$SHARED_CONFIG"/*; do
-          [[ -f "$cfg" ]] || continue
-          git -C "$ROOT/$path" add "$(basename "$cfg")"
+        for cfg in $synced; do
+          git -C "$ROOT/$path" add "$cfg"
         done
         if git -C "$ROOT/$path" diff --cached --quiet; then
           printf '  %-32s nothing to commit\n' "$r"
