@@ -358,8 +358,9 @@ cmd_workflows() {
       printf '  %-32s templates written\n' "$r"
       if [[ "$commit" == "--commit" ]]; then
         git -C "$ROOT/$path" add .github/workflows
-        for f in $synced; do
-          git -C "$ROOT/$path" add "$f"
+        for cfg in "$SHARED_CONFIG"/.* "$SHARED_CONFIG"/*; do
+          [[ -f "$cfg" ]] || continue
+          git -C "$ROOT/$path" add "$(basename "$cfg")"
         done
         if git -C "$ROOT/$path" diff --cached --quiet; then
           printf '  %-32s nothing to commit\n' "$r"
