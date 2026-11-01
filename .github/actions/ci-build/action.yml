@@ -51,13 +51,13 @@ runs:
         New-Item -Path ./.sonar/scanner -ItemType Directory
         dotnet tool update dotnet-sonarscanner --tool-path ./.sonar/scanner
     - name: Sonar token check
-      if: ${{ inputs.sonarToken == '' }}
+      if: ${{ inputs.sonarToken == '' || inputs.sonarProjectKey == '' }}
       shell: bash
       run: |
-        echo "::warning::SONAR_TOKEN is empty or missing - skipping Sonar analysis."
-        echo "Rotate it with: ./scripts/ci-sync.sh rotate SONAR_TOKEN"
+        echo "::warning::SONAR_TOKEN or SONAR_PROJECT_KEY is missing (fork pull requests cannot read repository secrets/variables) - skipping Sonar analysis."
+        echo "Rotate the token with: ./scripts/ci-sync.sh rotate SONAR_TOKEN"
     - name: Build and analyze
-      if: ${{ inputs.sonarToken != '' }}
+      if: ${{ inputs.sonarToken != '' && inputs.sonarProjectKey != '' }}
       env:
         GITHUB_TOKEN: ${{ inputs.githubToken }}
         SONAR_TOKEN: ${{ inputs.sonarToken }}
@@ -85,7 +85,7 @@ runs:
         ./.sonar/scanner/dotnet-sonarscanner end `
           /d:sonar.token="${{ inputs.sonarToken }}"
     - name: Build and test (no Sonar)
-      if: ${{ inputs.sonarToken == '' }}
+      if: ${{ inputs.sonarToken == '' || inputs.sonarProjectKey == '' }}
       shell: pwsh
       run: |
         dotnet test -- `

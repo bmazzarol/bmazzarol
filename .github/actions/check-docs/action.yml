@@ -24,7 +24,14 @@ runs:
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: ${{ inputs.dotnetVersion || '11.0.x' }}
+    - name: Docs project check
+      shell: bash
+      run: |
+        if [ -z "${{ inputs.docsProjectPath }}" ]; then
+          echo "::warning::DOCS_PROJECT_PATH / CS_PROJ_FILE_NAME are unavailable (fork pull requests cannot read repository variables) - skipping the docs check."
+        fi
     - name: Build
+      if: ${{ inputs.docsProjectPath != '' }}
       shell: bash
       run: |
         dotnet build --configuration Release ${{ inputs.docsProjectPath }}/${{inputs.csProjFileName }}

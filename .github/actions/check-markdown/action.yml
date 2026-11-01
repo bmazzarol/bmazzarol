@@ -4,7 +4,8 @@ description: Runs markdownlint over the md files
 inputs:
   targetMdFiles:
     description: globs that target the required md files to lint
-    required: true
+    required: false
+    default: '"**/*.md" "!node_modules/**" "!LICENSE.md"'
 
 runs:
   using: composite
