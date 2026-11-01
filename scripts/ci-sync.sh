@@ -27,6 +27,8 @@
 #   ci-sync.sh workflows apply [--commit]  write the templates into each repo
 #   ci-sync.sh docs check                  report docfx theme + metadata drift
 #   ci-sync.sh docs apply                  sync theme and metadata into every docs project
+#   ci-sync.sh landing check               report README/docs landing page drift
+#   ci-sync.sh landing apply               rewrite landing heroes from the shared copy
 #   ci-sync.sh status                      last workflow run per repo
 #
 # Options:
@@ -42,6 +44,7 @@ TEMPLATES="${CI_TEMPLATES:-$ROOT/.github/ci/workflows}"
 SHARED_CONFIG="${CI_SHARED_CONFIG:-$ROOT/.github/ci/config}"
 DOCS_METADATA="${CI_DOCS_METADATA:-$ROOT/.github/ci/config/docfx-global-metadata.json}"
 DOCS_THEME="${CI_DOCS_THEME:-$ROOT/docs/theme/public}"
+LANDING_COPY="${CI_LANDING_COPY:-$ROOT/.github/ci/config/landing-copy.json}"
 VAULT="${CI_SECRETS_FILE:-${XDG_CONFIG_HOME:-$HOME/.config}/bmazzarol/ci-secrets.env}"
 
 FILTER_REPOS=""
@@ -403,15 +406,13 @@ cmd_docs() {
     dest="$ROOT/$path/$docs/template/public"
     differs=0
 
-    for f in main.css main.js; do
-      if [[ ! -f "$dest/$f" ]]; then
-        printf '  %-32s %s missing\n' "$r" "$f"
-        differs=1
-      elif ! diff -q "$DOCS_THEME/$f" "$dest/$f" >/dev/null; then
-        printf '  %-32s %s differs\n' "$r" "$f"
-        differs=1
-      fi
-    done
+    if [[ ! -d "$dest" ]]; then
+      printf '  %-32s template/public missing\n' "$r"
+      differs=1
+    elif ! diff -rq "$DOCS_THEME" "$dest" >/dev/null; then
+      printf '  %-32s theme differs (css, js, fonts)\n' "$r"
+      differs=1
+    fi
 
     if [[ -d "$DOCS_THEME/../images" ]]; then
       for img in "$DOCS_THEME/../images"/*.png; do
@@ -452,7 +453,7 @@ cmd_docs() {
     fi
 
     mkdir -p "$dest"
-    cp "$DOCS_THEME/main.css" "$DOCS_THEME/main.js" "$dest"
+    cp -r "$DOCS_THEME"/. "$dest"
 
     logo="$(jq -r '.build.globalMetadata._appLogoPath // empty' "$cfg")"
     if [[ -n "$logo" ]]; then
@@ -483,6 +484,24 @@ cmd_docs() {
 
   if (( drift )) && [[ "$action" == "check" ]]; then
     return 1
+  fi
+}
+
+cmd_landing() {
+  action="${1:-check}"
+  script="$ROOT/scripts/apply-landing-copy.py"
+  [[ -f "$script" ]] || die "missing landing copy script: $script"
+  [[ -f "$LANDING_COPY" ]] || die "missing landing copy: $LANDING_COPY"
+
+  if [[ "$action" == "apply" ]]; then
+    python3 "$script" --write
+    for r in $(target_repos); do
+      path="$(repo_path "$r")"
+      [[ -n "$path" ]] && git -C "$ROOT" add "$path"
+    done
+    printf '\nSubmodule pointers are staged. Commit them with:\n  git commit -m "chore: bump submodule pointers after landing copy sync"\n'
+  else
+    python3 "$script" --check
   fi
 }
 
@@ -524,6 +543,7 @@ case "$cmd" in
   settings)  cmd_settings ;;
   workflows) cmd_workflows "${rest[0]:-check}" "${rest[1]:-}" ;;
   docs)      cmd_docs "${rest[0]:-check}" ;;
+  landing)   cmd_landing "${rest[0]:-check}" ;;
   docs-theme) cmd_docs "${rest[0]:-check}" ;;
   status)    cmd_status ;;
   *)         die "unknown command: $cmd (try repos, vault, rotate, set, sync, check, settings, workflows, docs, status)" ;;

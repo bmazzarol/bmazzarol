@@ -10,6 +10,9 @@ they are; they just receive their configuration from this repo.
 | ------------------------------ | -------------------------------------------- |
 | Repo list + per-repo settings  | `.github/ci/repos.json`                      |
 | Workflow files                 | `.github/ci/workflows/*.yml`                 |
+| Landing page copy and logos    | `.github/ci/config/landing-copy.json`        |
+| docfx theme (css, js, fonts)   | `docs/theme/public`                          |
+| docfx global metadata          | `.github/ci/config/docfx-global-metadata.json` |
 | Secrets (Sonar, NuGet, ...)    | `~/.config/bmazzarol/ci-secrets.env` locally, or the root repo's secrets in CI |
 | Shared CI actions              | `.github/actions/*`                          |
 
@@ -36,6 +39,19 @@ Repository variables used by the templates:
 here too (currently: MD013 line length off, because docfx articles and tables
 run long).
 
+`.github/ci/config/landing-copy.json` is the shared hero for every project: the
+title, the one line tagline, the description and which icon the project uses.
+`landing apply` (see below) rewrites both the README and the docs landing page
+from it, so a repo and its docs site always say the same thing. The README keeps
+its badge shields, the docs page does not. Docfx sites are markdown
+(`index.md`); Polyglot Notebook sites are notebooks (`index.ipynb`), and the
+script handles both.
+
+`docs/theme/images` holds the canonical icons, all drawn on the same 128px
+canvas by `scripts/normalise-icons.py`. Landing copy copies them into each repo
+(root icon and `Docs/images/`) so the logo a repo shows is the logo the theme
+shows.
+
 Repository secrets used:
 
 - `SONAR_TOKEN`
@@ -57,6 +73,8 @@ Repository secrets used:
 ./scripts/ci-sync.sh workflows apply --commit   # ...and commit/push + stage pointer bumps
 ./scripts/ci-sync.sh docs check               # docfx theme + metadata drift per docs project
 ./scripts/ci-sync.sh docs apply               # sync theme and metadata, commit per repo
+./scripts/ci-sync.sh landing check            # which READMEs/docs pages drift from the shared copy
+./scripts/ci-sync.sh landing apply            # rewrite them, commit per repo, stage pointer bumps
 ./scripts/ci-sync.sh status                 # last workflow run per repo
 ```
 
