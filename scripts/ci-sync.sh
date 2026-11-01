@@ -462,9 +462,9 @@ cmd_docs() {
 
     if (( differs == 0 )); then
       printf '  %-32s docs in sync\n' "$r"
-      continue
+    else
+      drift=1
     fi
-    drift=1
 
     if [[ "$action" != "apply" ]]; then
       continue
