@@ -18,7 +18,7 @@
   "Eon": {
     "title": "Eon",
     "tagline": "Say when something should run, as data.",
-    "description": "An immutable Schedule type: a potentially infinite stream of durations you can compose, iterate and await, with no execution engine attached.",
+    "description": "A Schedule is a stream of durations. Compose it, iterate it, await it, and never start a thread.",
     "package": "eon",
     "icon": "schedule-icon.png",
     "gettingStarted": "articles/getting-started.html"
@@ -34,7 +34,7 @@
   "Icicle": {
     "title": "Icicle",
     "tagline": "Freeze a group of tasks into one unit of work.",
-    "description": "A TaskScope that runs related child tasks together, hands back a ResultHandle for each promised value, and succeeds or fails as a single unit.",
+    "description": "A TaskScope groups related child tasks, runs them together, and returns a ResultHandle for each promised value.",
     "package": "Icicle",
     "icon": "icicles-icon.png",
     "gettingStarted": "articles/getting-started.html"
@@ -42,7 +42,7 @@
   "Pasted": {
     "title": "Pasted",
     "tagline": "Text files, baked into the binary.",
-    "description": "A source generator that embeds the contents of text files into C# at compile time, for source generators and AOT apps where there is no filesystem at runtime.",
+    "description": "A source generator that turns text files into string constants at compile time, for source generators and AOT apps where there is no filesystem at runtime.",
     "package": "Pasted",
     "icon": "glue-icon.png",
     "gettingStarted": "getting-started.html"
@@ -59,14 +59,14 @@
   "Tuxedo": {
     "title": "Tuxedo",
     "tagline": "Types that already know they are valid.",
-    "description": "A source generator that turns predicates into refined types, so a check made once carries its proof forward and never has to be repeated.",
+    "description": "A fluent builder for HttpRequestMessage and HttpResponseMessage built on System.Net.Http alone, with no dependencies.",
     "package": "tuxedo.sourcegenerator",
     "icon": "jacket-icon.png",
     "gettingStarted": "getting-started.html"
   },
   "docfx.result-snippets": {
     "title": "Docfx Result Snippets",
-    "tagline": "Show what the code actually printed.",
+    "tagline": "Show what the code printed.",
     "description": "Saves the output of a method call to markdown, which a docfx page can include as a table, chart, class diagram or plain snippet.",
     "package": "Docfx.ResultSnippets",
     "icon": "downloadable-logo.png",
