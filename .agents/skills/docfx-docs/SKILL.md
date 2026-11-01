@@ -69,8 +69,8 @@ Never edit a project's `template/public/main.css` directly. The theme is
 generated from the root repository:
 
 ```bash
-./scripts/ci-sync.sh docs-theme check    # which repos differ from the canonical theme
-./scripts/ci-sync.sh docs-theme apply    # copy theme into every docs project and commit
+./scripts/ci-sync.sh docs check      # which repos differ from the canonical theme/metadata
+./scripts/ci-sync.sh docs apply      # copy theme and merge metadata, commit per repo
 ```
 
 Preview first:

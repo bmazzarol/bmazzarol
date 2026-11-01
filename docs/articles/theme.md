@@ -24,12 +24,28 @@ That copy is generated, not hand edited. Changes go in `docs/theme` first, then
 get applied to every project with:
 
 ```bash
-./scripts/ci-sync.sh docs-theme check
-./scripts/ci-sync.sh docs-theme apply
+./scripts/ci-sync.sh docs check
+./scripts/ci-sync.sh docs apply
 ```
 
-`apply` commits the change in each submodule with a `docs(theme):` message, so a
+`apply` copies the theme and merges the shared docfx metadata into each project's
+`docfx.json`, then commits in each submodule with a `docs(theme):` message, so a
 theme rollout is one reviewable commit per repository.
+
+## Chrome decisions
+
+Shared docfx behaviour lives in `.github/ci/config/docfx-global-metadata.json`
+and is merged into each project's `globalMetadata`.
+
+| Element | Decision | Reason |
+| --- | --- | --- |
+| Breadcrumbs | off | these sites are five to ten pages deep with a linear toc, the trail adds nothing |
+| toc filter box | off | filtering a five-item sidebar is pointless, search already exists |
+| "In this article" | on, restyled | concept articles are long, a heading list is real help |
+| Next/previous article | on | the toc is a learning path, people read it end to end |
+| Site search | on | valuable once the API reference is generated |
+| "Edit this page" | on | one quiet link, useful for contributions |
+| Badge shields | removed from doc landing pages | status belongs in the README, not in the article |
 
 ## Previewing before it ships
 
@@ -53,7 +69,7 @@ so what you see locally is exactly what will ship.
 | Headings | size and weight only, no borders or background |
 | Code blocks | subtle surface, rounded, monospace at 0.875rem |
 | Tables | hairline rules, muted header text |
-| Footer | quiet surface band |
+| Footer | quiet surface band, links back to the profile site |
 | Dark mode | inherits docfx/Bootstrap tokens, no extra work |
 
 Design rule: if an element does not help the reader find something or decide

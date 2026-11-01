@@ -29,9 +29,12 @@
     "globalMetadata": {
       "_appName": "Ben Mazzarol",
       "_appTitle": "Ben Mazzarol",
-      "_appLogoPath": "images/fire-icon.png",
+      "_appLogoPath": "images/monogram.svg",
       "_appFaviconPath": "images/favicon.ico",
+      "_appLogoUrl": "https://bmazzarol.github.io/bmazzarol/",
       "_appFooter": "Built with <a href='https://dotnet.github.io/docfx'>docfx</a> from <a href='https://github.com/bmazzarol/bmazzarol'>this monorepo</a>",
+      "_disableBreadcrumb": true,
+      "_disableTocFilter": true,
       "_enableSearch": true
     }
   }

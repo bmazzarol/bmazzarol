@@ -63,8 +63,8 @@ chromium --headless=new --no-sandbox --screenshot=before.png \
 ## Shipping it
 
 ```bash
-./scripts/ci-sync.sh docs-theme check   # report repos that differ
-./scripts/ci-sync.sh docs-theme apply   # copy + commit in each submodule
+./scripts/ci-sync.sh docs check     # report theme and metadata drift
+./scripts/ci-sync.sh docs apply     # copy theme, merge metadata, commit per repo
 ```
 
 A theme change is staged until the preview site has been reviewed, then rolled

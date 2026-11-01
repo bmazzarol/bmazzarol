@@ -55,10 +55,30 @@ Repository secrets used:
 ./scripts/ci-sync.sh workflows check        # which repos differ from the templates
 ./scripts/ci-sync.sh workflows apply        # write templates + shared config into each submodule
 ./scripts/ci-sync.sh workflows apply --commit   # ...and commit/push + stage pointer bumps
+./scripts/ci-sync.sh docs check               # docfx theme + metadata drift per docs project
+./scripts/ci-sync.sh docs apply               # sync theme and metadata, commit per repo
 ./scripts/ci-sync.sh status                 # last workflow run per repo
 ```
 
 Options: `--repos=Tuxedo,Cutout` and `--dry-run`.
+
+## Documentation
+
+The canonical docfx theme and docfx metadata live in the root repo:
+
+```text
+docs/                                       the profile site, deployed to GitHub Pages
+docs/theme/public/main.css, main.js         shared theme, copied into every docs project
+.github/ci/config/docfx-global-metadata.json shared docfx globalMetadata
+```
+
+`docs apply` copies the theme into `<Docs>/template/public` and merges the shared
+metadata into each `<Docs>/docfx.json`, commits and pushes in the submodule, and
+stages the pointer bump. Preview first:
+
+```bash
+./scripts/docs-preview.sh --serve   # http://localhost:8080
+```
 
 ## Rotating the Sonar token
 

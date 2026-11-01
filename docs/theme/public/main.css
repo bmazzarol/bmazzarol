@@ -184,10 +184,7 @@ th {
 
 /* ------------------------------------------------------------ secondary chrome */
 
-#breadcrumb {
-  font-size: 0.8rem;
-  color: var(--bm-muted);
-}
+/* breadcrumbs are turned off by the shared docfx metadata */
 
 .actionbar {
   margin-bottom: 0.75rem;

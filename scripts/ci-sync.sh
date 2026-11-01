@@ -25,8 +25,8 @@
 #   ci-sync.sh settings                    push per-repo settings as repo variables
 #   ci-sync.sh workflows check             compare each repo to the templates
 #   ci-sync.sh workflows apply [--commit]  write the templates into each repo
-#   ci-sync.sh docs-theme check            report repos whose docfx theme differs
-#   ci-sync.sh docs-theme apply            copy docs/theme into every docs project
+#   ci-sync.sh docs check                  report docfx theme + metadata drift
+#   ci-sync.sh docs apply                  sync theme and metadata into every docs project
 #   ci-sync.sh status                      last workflow run per repo
 #
 # Options:
@@ -40,6 +40,8 @@ ROOT="$(git rev-parse --show-toplevel)"
 CONFIG="${CI_CONFIG:-$ROOT/.github/ci/repos.json}"
 TEMPLATES="${CI_TEMPLATES:-$ROOT/.github/ci/workflows}"
 SHARED_CONFIG="${CI_SHARED_CONFIG:-$ROOT/.github/ci/config}"
+DOCS_METADATA="${CI_DOCS_METADATA:-$ROOT/.github/ci/config/docfx-global-metadata.json}"
+DOCS_THEME="${CI_DOCS_THEME:-$ROOT/docs/theme/public}"
 VAULT="${CI_SECRETS_FILE:-${XDG_CONFIG_HOME:-$HOME/.config}/bmazzarol/ci-secrets.env}"
 
 FILTER_REPOS=""
@@ -328,6 +330,8 @@ cmd_workflows() {
     for tpl in "$TEMPLATES"/*.yml "$SHARED_CONFIG"/.* "$SHARED_CONFIG"/*; do
       [[ -f "$tpl" ]] || continue
       name="$(basename "$tpl")"
+      # the docfx metadata file is applied by `docs apply`, not copied to a repo root
+      [[ "$name" == "docfx-global-metadata.json" ]] && continue
       if [[ "$tpl" == "$TEMPLATES"/* ]]; then
         docs="$(repo_setting "$r" docsProjectPath)"
         if [[ ("$name" == "check-docs.yml" || "$name" == "build-deploy-docs.yml") && ( -z "$docs" || "$docs" == "null" ) ]]; then
@@ -381,10 +385,10 @@ cmd_workflows() {
   fi
 }
 
-cmd_docs_theme() {
+cmd_docs() {
   action="${1:-check}"
-  theme="$ROOT/docs/theme/public"
-  [[ -d "$theme" ]] || die "missing theme directory: $theme"
+  [[ -d "$DOCS_THEME" ]] || die "missing theme directory: $DOCS_THEME"
+  [[ -f "$DOCS_METADATA" ]] || die "missing docfx metadata: $DOCS_METADATA"
 
   drift=0
   for r in $(target_repos); do
@@ -394,39 +398,64 @@ cmd_docs_theme() {
       printf '  %-32s no docs project, skipping\n' "$r"
       continue
     fi
+
+    cfg="$ROOT/$path/$docs/docfx.json"
     dest="$ROOT/$path/$docs/template/public"
     differs=0
+
     for f in main.css main.js; do
       if [[ ! -f "$dest/$f" ]]; then
         printf '  %-32s %s missing\n' "$r" "$f"
         differs=1
-      elif ! diff -q "$theme/$f" "$dest/$f" >/dev/null; then
+      elif ! diff -q "$DOCS_THEME/$f" "$dest/$f" >/dev/null; then
         printf '  %-32s %s differs\n' "$r" "$f"
         differs=1
       fi
     done
+
+    if [[ -f "$cfg" ]]; then
+      for key in $(jq -r 'keys[]' "$DOCS_METADATA"); do
+        want="$(jq -r --arg k "$key" '.[$k]' "$DOCS_METADATA")"
+        have="$(jq -r --arg k "$key" '.build.globalMetadata | .[$k] // "missing"' "$cfg")"
+        if [[ "$have" != "$want" ]]; then
+          printf '  %-32s docfx.json %s: %s (want %s)\n' "$r" "$key" "$have" "$want"
+          differs=1
+        fi
+      done
+    else
+      printf '  %-32s docfx.json not found\n' "$r"
+      differs=1
+    fi
+
     if (( differs == 0 )); then
-      printf '  %-32s theme in sync\n' "$r"
+      printf '  %-32s docs in sync\n' "$r"
       continue
     fi
     drift=1
+
     if [[ "$action" != "apply" ]]; then
       continue
     fi
     if (( DRY_RUN )); then
-      printf '    [dry-run] would copy the theme into %s/%s/template/public\n' "$path" "$docs"
+      printf '    [dry-run] would sync theme and metadata into %s/%s\n' "$path" "$docs"
       continue
     fi
+
     mkdir -p "$dest"
-    cp "$theme/main.css" "$theme/main.js" "$dest"
-    git -C "$ROOT/$path" add "$docs/template/public"
+    cp "$DOCS_THEME/main.css" "$DOCS_THEME/main.js" "$dest"
+    tmp="$(mktemp)"
+    jq --indent 4 --argjson meta "$(cat "$DOCS_METADATA")" \
+      '.build.globalMetadata = ((.build.globalMetadata // {}) + $meta)' "$cfg" > "$tmp"
+    mv "$tmp" "$cfg"
+
+    git -C "$ROOT/$path" add "$docs/template/public" "$docs/docfx.json"
     if git -C "$ROOT/$path" diff --cached --quiet; then
       printf '  %-32s nothing to commit\n' "$r"
     else
-      git -C "$ROOT/$path" commit --no-verify -m "docs(theme): sync the shared docfx theme from bmazzarol/bmazzarol"
+      git -C "$ROOT/$path" commit --no-verify -m "docs(theme): sync the shared docfx theme and metadata from bmazzarol/bmazzarol"
       git -C "$ROOT/$path" push origin main
       git -C "$ROOT" add "$path"
-      printf '  %-32s theme applied and pushed\n' "$r"
+      printf '  %-32s docs synced and pushed\n' "$r"
     fi
   done
 
@@ -472,7 +501,8 @@ case "$cmd" in
   verify)    cmd_verify ;;
   settings)  cmd_settings ;;
   workflows) cmd_workflows "${rest[0]:-check}" "${rest[1]:-}" ;;
-  docs-theme) cmd_docs_theme "${rest[0]:-check}" ;;
+  docs)      cmd_docs "${rest[0]:-check}" ;;
+  docs-theme) cmd_docs "${rest[0]:-check}" ;;
   status)    cmd_status ;;
-  *)         die "unknown command: $cmd (try repos, vault, rotate, set, sync, check, settings, workflows, docs-theme, status)" ;;
+  *)         die "unknown command: $cmd (try repos, vault, rotate, set, sync, check, settings, workflows, docs, status)" ;;
 esac
