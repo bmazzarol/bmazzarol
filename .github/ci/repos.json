@@ -10,7 +10,7 @@
       "sonarProjectKey": "bmazzarol_Bunsen-Burner",
       "docsProjectPath": "BunsenBurner.Docs",
       "csProjFileName": "BunsenBurner.Docs.csproj",
-      "markdownGlobs": "\"!LICENSE.md\" \"!node_modules/**\" \"**/*.md\" \"BunsenBurner*/**/*.md\" \"BunsenBurner.Docs/**/*.md\"",
+      "markdownGlobs": "\"**/*.md\" \"BunsenBurner*/**/*.md\" \"BunsenBurner.Docs/**/*.md\" \"!LICENSE.md\" \"!node_modules/**/*.md\" \"!.github/**/*.md\"",
       "dotnetVersion": "11.0.x"
     },
     {
@@ -18,7 +18,7 @@
       "sonarProjectKey": "bmazzarol_Cutout",
       "docsProjectPath": "Cutout.Docs",
       "csProjFileName": "Cutout.Docs.csproj",
-      "markdownGlobs": "\"!LICENSE.md\" \"!node_modules/**\" \"**/*.md\" \"Cutout*/**/*.md\" \"Cutout.Docs/**/*.md\"",
+      "markdownGlobs": "\"**/*.md\" \"Cutout*/**/*.md\" \"Cutout.Docs/**/*.md\" \"!LICENSE.md\" \"!node_modules/**/*.md\" \"!.github/**/*.md\"",
       "dotnetVersion": "11.0.x"
     },
     {
@@ -26,7 +26,7 @@
       "sonarProjectKey": "bmazzarol_Eon",
       "docsProjectPath": "Eon.Docs",
       "csProjFileName": "Eon.Docs.csproj",
-      "markdownGlobs": "\"!Eon.Tests/**/__examples__/*.md\" \"!LICENSE.md\" \"!node_modules/**\" \"**/*.md\" \"Eon*/**/*.md\"",
+      "markdownGlobs": "\"**/*.md\" \"Eon*/**/*.md\" \"!Eon.Tests/**/__examples__/*.md\" \"!LICENSE.md\" \"!node_modules/**/*.md\" \"!.github/**/*.md\"",
       "dotnetVersion": "11.0.x"
     },
     {
@@ -34,7 +34,7 @@
       "sonarProjectKey": "bmazzarol_Http-BuildR",
       "docsProjectPath": "src/Docs/HttpBuildR.Docs",
       "csProjFileName": "HttpBuildR.Docs.csproj",
-      "markdownGlobs": "\"!LICENSE.md\" \"!node_modules/**\" \"**/*.md\" \"HttpBuildR*/**/*.md\"",
+      "markdownGlobs": "\"**/*.md\" \"HttpBuildR*/**/*.md\" \"!LICENSE.md\" \"!node_modules/**/*.md\" \"!.github/**/*.md\" \"!**/Examples/__examples__/**/*.md\"",
       "dotnetVersion": "11.0.x"
     },
     {
@@ -42,7 +42,7 @@
       "sonarProjectKey": "bmazzarol_Icicle",
       "docsProjectPath": "Icicle.Docs",
       "csProjFileName": "Icicle.Docs.csproj",
-      "markdownGlobs": "\"!LICENSE.md\" \"!node_modules/**\" \"**/*.md\" \"Icicle*/**/*.md\"",
+      "markdownGlobs": "\"**/*.md\" \"Icicle*/**/*.md\" \"!LICENSE.md\" \"!node_modules/**/*.md\" \"!.github/**/*.md\"",
       "dotnetVersion": "11.0.x"
     },
     {
@@ -50,7 +50,7 @@
       "sonarProjectKey": "bmazzarol_docfx.result-snippets",
       "docsProjectPath": "Docfx.ResultSnippets.Docs",
       "csProjFileName": "Docfx.ResultSnippets.Docs.csproj",
-      "markdownGlobs": "\"!Docfx.ResultSnippets.Docs/**/src/*.md\" \"!Docfx.ResultSnippets.Tests/**/__examples__/*.md\" \"!LICENSE.md\" \"!node_modules/**\" \"**/*.md\" \"Docfx.ResultSnippets*/**/*.md\"",
+      "markdownGlobs": "\"**/*.md\" \"Docfx.ResultSnippets*/**/*.md\" \"!Docfx.ResultSnippets.Docs/**/src/*.md\" \"!Docfx.ResultSnippets.Tests/**/__examples__/*.md\" \"!LICENSE.md\" \"!node_modules/**/*.md\" \"!.github/**/*.md\"",
       "dotnetVersion": "11.0.x"
     },
     {
@@ -58,7 +58,7 @@
       "sonarProjectKey": "bmazzarol_Polyglot.Notebook.Docfx.Plugin",
       "docsProjectPath": "Polyglot.Notebook.Docfx.Plugin.Docs",
       "csProjFileName": "Polyglot.Notebook.Docfx.Plugin.Docs.csproj",
-      "markdownGlobs": "\"!LICENSE.md\" \"!Polyglot.Notebook.Docfx.Plugin.Tests*/**/*.md\" \"!node_modules/**\" \"**/*.md\" \"Polyglot.Notebook.Docfx*/**/*.md\" \"Polyglot.Notebook.Docfx.Plugin.Docs/**/*.md\"",
+      "markdownGlobs": "\"**/*.md\" \"Polyglot.Notebook.Docfx*/**/*.md\" \"Polyglot.Notebook.Docfx.Plugin.Docs/**/*.md\" \"!LICENSE.md\" \"!Polyglot.Notebook.Docfx.Plugin.Tests*/**/*.md\" \"!node_modules/**/*.md\" \"!.github/**/*.md\"",
       "dotnetVersion": "11.0.x"
     },
     {
@@ -67,7 +67,7 @@
       "sonarProjectKey": "bmazzarol_Pasted",
       "docsProjectPath": "Pasted.Docs",
       "csProjFileName": "Pasted.Docs.csproj",
-      "markdownGlobs": "\"!LICENSE.md\" \"!node_modules/**\" \"**/*.md\" \"Pasted*/**/*.md\" \"Pasted.Docs/**/*.md\"",
+      "markdownGlobs": "\"**/*.md\" \"Pasted*/**/*.md\" \"Pasted.Docs/**/*.md\" \"!LICENSE.md\" \"!node_modules/**/*.md\" \"!.github/**/*.md\"",
       "dotnetVersion": "11.0.x"
     },
     {
@@ -75,7 +75,7 @@
       "sonarProjectKey": "bmazzarol_Tuxedo",
       "docsProjectPath": "Tuxedo.Docs",
       "csProjFileName": "Tuxedo.Docs.csproj",
-      "markdownGlobs": "\"!LICENSE.md\" \"!node_modules/**\" \"**/*.md\" \"Tuxedo*/**/*.md\"",
+      "markdownGlobs": "\"**/*.md\" \"Tuxedo*/**/*.md\" \"!LICENSE.md\" \"!node_modules/**/*.md\" \"!.github/**/*.md\"",
       "dotnetVersion": "11.0.x"
     },
     {
@@ -84,7 +84,7 @@
       "sonarProjectKey": "bmazzarol_Quacker",
       "docsProjectPath": null,
       "csProjFileName": null,
-      "markdownGlobs": "\"!LICENSE.md\" \"!node_modules/**\" \"**/*.md\"",
+      "markdownGlobs": "\"**/*.md\" \"!LICENSE.md\" \"!node_modules/**/*.md\" \"!.github/**/*.md\"",
       "notes": "not registered as a submodule yet; add with scripts/add-dotnet-project.nu",
       "dotnetVersion": "11.0.x"
     }

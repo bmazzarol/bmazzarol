@@ -27,6 +27,14 @@ Repository variables used by the templates:
 - `DOTNET_VERSION` - the .NET SDK channel every workflow installs (currently
   `11.0.x`). `setup-dotnet` resolves the channel to the newest release in it,
   so this picks up 11.0 GA automatically without touching the templates.
+- `MARKDOWN_GLOBS` - `markdownlint-cli2` target specs. Ordering matters: negations
+  only remove files that were already included, so put includes first and the
+  `!` exclusions afterwards.
+
+`.github/ci/config/.markdownlint-cli2.jsonc` is the shared markdownlint config.
+`workflows apply` copies it into every repo root, so lint rules are centralised
+here too (currently: MD013 line length off, because docfx articles and tables
+run long).
 
 Repository secrets used:
 
@@ -45,7 +53,7 @@ Repository secrets used:
 ./scripts/ci-sync.sh sync                   # push every vault value to every repo
 ./scripts/ci-sync.sh settings               # push repo variables from repos.json
 ./scripts/ci-sync.sh workflows check        # which repos differ from the templates
-./scripts/ci-sync.sh workflows apply        # write the templates into each submodule
+./scripts/ci-sync.sh workflows apply        # write templates + shared config into each submodule
 ./scripts/ci-sync.sh workflows apply --commit   # ...and commit/push + stage pointer bumps
 ./scripts/ci-sync.sh status                 # last workflow run per repo
 ```

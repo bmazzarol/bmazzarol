@@ -37,6 +37,7 @@ OWNER="bmazzarol"
 ROOT="$(git rev-parse --show-toplevel)"
 CONFIG="${CI_CONFIG:-$ROOT/.github/ci/repos.json}"
 TEMPLATES="${CI_TEMPLATES:-$ROOT/.github/ci/workflows}"
+SHARED_CONFIG="${CI_SHARED_CONFIG:-$ROOT/.github/ci/config}"
 VAULT="${CI_SECRETS_FILE:-${XDG_CONFIG_HOME:-$HOME/.config}/bmazzarol/ci-secrets.env}"
 
 FILTER_REPOS=""
@@ -321,23 +322,31 @@ cmd_workflows() {
       continue
     fi
     diffs=0
-    for tpl in "$TEMPLATES"/*.yml; do
+    synced=""
+    for tpl in "$TEMPLATES"/*.yml "$SHARED_CONFIG"/.* "$SHARED_CONFIG"/*; do
+      [[ -f "$tpl" ]] || continue
       name="$(basename "$tpl")"
-      docs="$(repo_setting "$r" docsProjectPath)"
-      if [[ ("$name" == "check-docs.yml" || "$name" == "build-deploy-docs.yml") && ( -z "$docs" || "$docs" == "null" ) ]]; then
-        printf '  %-32s %s skipped (no docs project)\n' "$r" "$name"
-        continue
+      if [[ "$tpl" == "$TEMPLATES"/* ]]; then
+        docs="$(repo_setting "$r" docsProjectPath)"
+        if [[ ("$name" == "check-docs.yml" || "$name" == "build-deploy-docs.yml") && ( -z "$docs" || "$docs" == "null" ) ]]; then
+          printf '  %-32s %s skipped (no docs project)\n' "$r" "$name"
+          continue
+        fi
+        local_file="$ROOT/$path/.github/workflows/$name"
+      else
+        local_file="$ROOT/$path/$name"
       fi
-      local_file="$ROOT/$path/.github/workflows/$name"
       if [[ ! -f "$local_file" ]]; then
         printf '  %-32s %s missing\n' "$r" "$name"
         diffs=1
+        if [[ "$tpl" != "$TEMPLATES"/* ]]; then synced="$synced $name"; fi
       elif ! diff -q "$tpl" "$local_file" >/dev/null; then
         printf '  %-32s %s differs\n' "$r" "$name"
         diffs=1
+        if [[ "$tpl" != "$TEMPLATES"/* ]]; then synced="$synced $name"; fi
       fi
       if [[ "$action" == "apply" ]]; then
-        mkdir -p "$ROOT/$path/.github/workflows"
+        mkdir -p "$(dirname "$local_file")"
         cp "$tpl" "$local_file"
       fi
     done
@@ -349,7 +358,10 @@ cmd_workflows() {
       printf '  %-32s templates written\n' "$r"
       if [[ "$commit" == "--commit" ]]; then
         git -C "$ROOT/$path" add .github/workflows
-        git -C "$ROOT/$path" commit --no-verify -m "chore(ci): sync workflow templates from bmazzarol/bmazzarol"
+        for f in $synced; do
+          git -C "$ROOT/$path" add "$f"
+        done
+        git -C "$ROOT/$path" commit --no-verify -m "chore(ci): sync workflow templates and shared config from bmazzarol/bmazzarol"
         git -C "$ROOT/$path" push origin main
         if git config -f "$ROOT/.gitmodules" --get-regexp path | grep -q "$path"; then
           git -C "$ROOT" add "$path"
