@@ -31,5 +31,5 @@ page, worked examples, and an API reference generated from the source.
 ## Elsewhere
 
 - [GitHub](https://github.com/bmazzarol)
-- [NuGet](https://www.nuget.org/packages?q=benmazzarol)
+- [NuGet](https://www.nuget.org/packages?q=bmazzarol)
 - [SonarCloud](https://sonarcloud.io/organizations/bmazzarol)

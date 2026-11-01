@@ -32,24 +32,27 @@ api/                generated reference, not written by hand
 The table of contents is a learning path, not a file listing. Order it by the
 order a person needs to learn things, not by the order the source files appear.
 
-The landing page has a fixed shape:
+The landing page has a fixed shape, written in `index.md` and generated from
+`.github/ci/config/landing-copy.json` by `./scripts/ci-sync.sh landing apply`:
 
 ```text
 # Cutout
 
-![Cutout](../images/scissors-icon.png)
+![Cutout](images/scissors-icon.png)
 
-**Source generated templating that costs nothing.**
+**Templating that costs nothing at runtime.**
 
-Cutout is a source generator for .NET that emits correctly indented code from a
-template, so you never build generated strings by hand.
+A source generator that renders Liquid style templates into a StringBuilder at
+compile time, so generated code keeps its indentation without a template engine
+dependency.
 
 dotnet add package Cutout
 ```
 
-The logo sits on the line below the title at 48px. It is not repeated anywhere
-else on the page: the navbar and the favicon already carry it. Badge shields do
-not belong here; they are for the README.
+The logo is its own paragraph under the title. The theme floats it beside the
+intro copy at 44px. It is not repeated anywhere else on the page: the navbar
+and the favicon already carry it. Badge shields do not belong here; they are
+for the README.
 
 ## Voice
 
@@ -74,8 +77,8 @@ An example is a claim that the code works. Treat it as a test.
   to learn anything.
 - Keep the example to the shortest thing that still proves the point. Cut imports,
   boilerplate and unrelated setup.
-- Use `csharp` fences, and name variables the way you would want them named in
-  a real program.
+- Use `csharp` fences (docfx also accepts `c#`), and name variables the way you
+  would want them named in a real program.
 - One idea per example. If an example demonstrates two things, split it.
 
 ## Headings and prose
