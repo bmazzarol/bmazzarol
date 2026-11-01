@@ -37,7 +37,7 @@ The landing page has a fixed shape:
 ```text
 # Cutout
 
-![Cutout](images/scissors-icon.png)
+![Cutout](../images/scissors-icon.png)
 
 **Source generated templating that costs nothing.**
 

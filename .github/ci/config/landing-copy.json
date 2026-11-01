@@ -59,7 +59,7 @@
   "Tuxedo": {
     "title": "Tuxedo",
     "tagline": "Types that already know they are valid.",
-    "description": "A fluent builder for HttpRequestMessage and HttpResponseMessage built on System.Net.Http alone, with no dependencies.",
+    "description": "A source generator that turns a predicate into a refined type, so a value of that type has already passed the check.",
     "package": "tuxedo.sourcegenerator",
     "icon": "jacket-icon.png",
     "gettingStarted": "getting-started.html"
@@ -75,7 +75,7 @@
   "Quacker": {
     "title": "Quacker",
     "tagline": "Duck typing, resolved at compile time.",
-    "description": "A source generator that specialises a generic method for every combination of argument types you actually call it with, so you can invoke members on a type parameter the compiler never had to know about.",
+    "description": "A source generator that specialises a generic method for every combination of argument types it is called with, so a member can be invoked on a type parameter the compiler never had to know about.",
     "package": null,
     "icon": "duck-icon.png",
     "gettingStarted": null
