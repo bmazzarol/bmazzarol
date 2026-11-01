@@ -42,7 +42,7 @@ VAULT="${CI_SECRETS_FILE:-${XDG_CONFIG_HOME:-$HOME/.config}/bmazzarol/ci-secrets
 FILTER_REPOS=""
 DRY_RUN=0
 
-SETTINGS="sonarProjectKey:SONAR_PROJECT_KEY docsProjectPath:DOCS_PROJECT_PATH csProjFileName:CS_PROJ_FILE_NAME markdownGlobs:MARKDOWN_GLOBS"
+SETTINGS="sonarProjectKey:SONAR_PROJECT_KEY docsProjectPath:DOCS_PROJECT_PATH csProjFileName:CS_PROJ_FILE_NAME markdownGlobs:MARKDOWN_GLOBS dotnetVersion:DOTNET_VERSION"
 
 declare -A SECRET       # name -> value
 declare -A SECRET_SRC   # name -> vault | env

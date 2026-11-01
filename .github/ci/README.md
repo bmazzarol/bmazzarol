@@ -24,6 +24,9 @@ Repository variables used by the templates:
 - `DOCS_PROJECT_PATH`
 - `CS_PROJ_FILE_NAME`
 - `MARKDOWN_GLOBS`
+- `DOTNET_VERSION` - the .NET SDK channel every workflow installs (currently
+  `11.0.x`). `setup-dotnet` resolves the channel to the newest release in it,
+  so this picks up 11.0 GA automatically without touching the templates.
 
 Repository secrets used:
 
