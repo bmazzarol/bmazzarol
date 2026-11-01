@@ -22,3 +22,9 @@
 [submodule "projects/dotnet/Polyglot.Notebook.Docfx.Plugin"]
 	path = projects/dotnet/Polyglot.Notebook.Docfx.Plugin
 	url = https://github.com/bmazzarol/Polyglot.Notebook.Docfx.Plugin.git
+[submodule "projects/dotnet/Quacker"]
+	path = projects/dotnet/Quacker
+	url = https://github.com/bmazzarol/Quacker.git
+[submodule "projects/dotnet/Pasted"]
+	path = projects/dotnet/Pasted
+	url = https://github.com/bmazzarol/Pasted.git

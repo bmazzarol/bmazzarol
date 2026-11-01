@@ -46,7 +46,14 @@ runs:
       run: |
         New-Item -Path ./.sonar/scanner -ItemType Directory
         dotnet tool update dotnet-sonarscanner --tool-path ./.sonar/scanner
+    - name: Sonar token check
+      if: ${{ inputs.sonarToken == '' }}
+      shell: bash
+      run: |
+        echo "::warning::SONAR_TOKEN is empty or missing - skipping Sonar analysis."
+        echo "Rotate it with: ./scripts/ci-sync.sh rotate SONAR_TOKEN"
     - name: Build and analyze
+      if: ${{ inputs.sonarToken != '' }}
       env:
         GITHUB_TOKEN: ${{ inputs.githubToken }}
         SONAR_TOKEN: ${{ inputs.sonarToken }}
@@ -73,6 +80,19 @@ runs:
         
         ./.sonar/scanner/dotnet-sonarscanner end `
           /d:sonar.token="${{ inputs.sonarToken }}"
+    - name: Build and test (no Sonar)
+      if: ${{ inputs.sonarToken == '' }}
+      shell: pwsh
+      run: |
+        dotnet test -- `
+          -ignore-exit-code 8 `
+          --coverage `
+          --coverage-output-format xml `
+          --coverage-output coverage.xml `
+          --report-xunit-trx `
+          --report-xunit-trx-filename test-results.trx `
+          --report-xunit `
+          --report-xunit-filename report.xml
     - name: Upload Test Results
       uses: actions/upload-artifact@v4
       if: ${{ always() && github.event_name == 'pull_request' }}

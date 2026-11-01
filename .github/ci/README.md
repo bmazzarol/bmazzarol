@@ -1,0 +1,78 @@
+# CI settings and secrets sync
+
+Everything the submodule repos need from GitHub (secrets, workflow files,
+per-repo settings) lives here in the root repo. The submodule repos stay where
+they are; they just receive their configuration from this repo.
+
+## What lives where
+
+| Thing                          | Source of truth                              |
+| ------------------------------ | -------------------------------------------- |
+| Repo list + per-repo settings  | `.github/ci/repos.json`                      |
+| Workflow files                 | `.github/ci/workflows/*.yml`                 |
+| Secrets (Sonar, NuGet, ...)    | `~/.config/bmazzarol/ci-secrets.env` locally, or the root repo's secrets in CI |
+| Shared CI actions              | `.github/actions/*`                          |
+
+The workflow templates are identical for every repo. Values that used to be
+hard-coded in each repo's workflow (Sonar project key, docs path, markdown
+globs) are now read from **repository variables**, so changing them is a
+one-line edit in `repos.json` instead of nine file edits.
+
+Repository variables used by the templates:
+
+- `SONAR_PROJECT_KEY`
+- `DOCS_PROJECT_PATH`
+- `CS_PROJ_FILE_NAME`
+- `MARKDOWN_GLOBS`
+
+Repository secrets used:
+
+- `SONAR_TOKEN`
+- `NUGET_API_KEY`
+
+## The tool
+
+```bash
+./scripts/ci-sync.sh repos                  # what is managed, and its settings
+./scripts/ci-sync.sh vault                  # which secrets the vault holds
+./scripts/ci-sync.sh check                  # drift report (non-zero exit on drift)
+./scripts/ci-sync.sh verify                 # confirm SonarCloud accepts the vault's token
+./scripts/ci-sync.sh rotate SONAR_TOKEN     # prompt, store, push to every repo
+./scripts/ci-sync.sh set NUGET_API_KEY <key>
+./scripts/ci-sync.sh sync                   # push every vault value to every repo
+./scripts/ci-sync.sh settings               # push repo variables from repos.json
+./scripts/ci-sync.sh workflows check        # which repos differ from the templates
+./scripts/ci-sync.sh workflows apply        # write the templates into each submodule
+./scripts/ci-sync.sh workflows apply --commit   # ...and commit/push + stage pointer bumps
+./scripts/ci-sync.sh status                 # last workflow run per repo
+```
+
+Options: `--repos=Tuxedo,Cutout` and `--dry-run`.
+
+## Rotating the Sonar token
+
+1. Generate a new token at <https://sonarcloud.com/account/authorizations>.
+2. `./scripts/ci-sync.sh rotate SONAR_TOKEN`
+3. `./scripts/ci-sync.sh verify` - prints `{"valid":true}` from SonarCloud
+4. `./scripts/ci-sync.sh check`
+
+GitHub never lets you read a stored secret back, so each key has to be seeded
+into the vault once; after that every rotation is one command for all repos.
+
+The vault file is never committed; it is a plain `KEY=value` file with mode
+`600`. Override the location with `CI_SECRETS_FILE` if you prefer.
+
+## Adding a repo
+
+1. `scripts/add-dotnet-project.nu <name> <description>` (creates the submodule,
+   workflows and docs project).
+2. Add an entry to `.github/ci/repos.json`.
+3. `./scripts/ci-sync.sh settings` and `./scripts/ci-sync.sh workflows apply`.
+
+## Automated sync
+
+`.github/workflows/ci-sync.yml` runs daily and on demand. It reads
+`SONAR_TOKEN` / `NUGET_API_KEY` from this repo's own secrets and pushes them to
+every repo in `repos.json`. For that to work, `CI_SYNC_TOKEN` must be a token
+with *Secrets: Read & Write* on the target repos - the job's built-in
+`GITHUB_TOKEN` cannot write secrets into sibling repositories.

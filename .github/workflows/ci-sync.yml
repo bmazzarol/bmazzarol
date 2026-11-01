@@ -1,0 +1,25 @@
+name: CI Sync
+
+on:
+  schedule:
+    - cron: "0 6 * * *"
+  workflow_dispatch:
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    env:
+      # A PAT (or fine-grained token) with "Secrets: Read & Write" on every
+      # target repo. GITHUB_TOKEN from this repo cannot write secrets into
+      # the sibling repos.
+      GH_TOKEN: ${{ secrets.CI_SYNC_TOKEN }}
+      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Push secrets out to every repo
+        run: ./scripts/ci-sync.sh sync
+      - name: Push per-repo settings as repo variables
+        run: ./scripts/ci-sync.sh settings
+      - name: Report drift
+        run: ./scripts/ci-sync.sh check

@@ -1,0 +1,82 @@
+{
+  "owner": "bmazzarol",
+  "secrets": [
+    "SONAR_TOKEN",
+    "NUGET_API_KEY"
+  ],
+  "repos": [
+    {
+      "name": "Bunsen-Burner",
+      "sonarProjectKey": "bmazzarol_Bunsen-Burner",
+      "docsProjectPath": "BunsenBurner.Docs",
+      "csProjFileName": "BunsenBurner.Docs.csproj",
+      "markdownGlobs": "\"**/*.md\" \"BunsenBurner*/**/*.md\" \"BunsenBurner.Docs/**/*.md\" \"!LICENSE.md\" \"!node_modules/**\""
+    },
+    {
+      "name": "Cutout",
+      "sonarProjectKey": "bmazzarol_Cutout",
+      "docsProjectPath": "Cutout.Docs",
+      "csProjFileName": "Cutout.Docs.csproj",
+      "markdownGlobs": "\"**/*.md\" \"Cutout*/**/*.md\" \"Cutout.Docs/**/*.md\" \"!LICENSE.md\" \"!node_modules/**\""
+    },
+    {
+      "name": "Eon",
+      "sonarProjectKey": "bmazzarol_Eon",
+      "docsProjectPath": "Eon.Docs",
+      "csProjFileName": "Eon.Docs.csproj",
+      "markdownGlobs": "\"**/*.md\" \"Eon*/**/*.md\" \"!Eon.Tests/**/__examples__/*.md\" \"!node_modules/**\""
+    },
+    {
+      "name": "Http-BuildR",
+      "sonarProjectKey": "bmazzarol_Http-BuildR",
+      "docsProjectPath": "src/Docs/HttpBuildR.Docs",
+      "csProjFileName": "HttpBuildR.Docs.csproj",
+      "markdownGlobs": "\"**/*.md\" \"HttpBuildR*/**/*.md\" \"!node_modules/**\""
+    },
+    {
+      "name": "Icicle",
+      "sonarProjectKey": "bmazzarol_Icicle",
+      "docsProjectPath": "Icicle.Docs",
+      "csProjFileName": "Icicle.Docs.csproj",
+      "markdownGlobs": "\"**/*.md\" \"Icicle*/**/*.md\" \"!node_modules/**\""
+    },
+    {
+      "name": "docfx.result-snippets",
+      "sonarProjectKey": "bmazzarol_docfx.result-snippets",
+      "docsProjectPath": "Docfx.ResultSnippets.Docs",
+      "csProjFileName": "Docfx.ResultSnippets.Docs.csproj",
+      "markdownGlobs": "\"**/*.md\" \"Docfx.ResultSnippets*/**/*.md\" \"!Docfx.ResultSnippets.Tests/**/__examples__/*.md\" \"!Docfx.ResultSnippets.Docs/**/src/*.md\" \"!node_modules/**\""
+    },
+    {
+      "name": "Polyglot.Notebook.Docfx.Plugin",
+      "sonarProjectKey": "bmazzarol_Polyglot.Notebook.Docfx.Plugin",
+      "docsProjectPath": "Polyglot.Notebook.Docfx.Plugin.Docs",
+      "csProjFileName": "Polyglot.Notebook.Docfx.Plugin.Docs.csproj",
+      "markdownGlobs": "\"**/*.md\" \"Polyglot.Notebook.Docfx*/**/*.md\" \"Polyglot.Notebook.Docfx.Plugin.Docs/**/*.md\" \"!Polyglot.Notebook.Docfx.Plugin.Tests*/**/*.md\" \"!node_modules/**\""
+    },
+    {
+      "name": "Pasted",
+      "path": "projects/dotnet/Pasted",
+      "sonarProjectKey": "bmazzarol_Pasted",
+      "docsProjectPath": "Pasted.Docs",
+      "csProjFileName": "Pasted.Docs.csproj",
+      "markdownGlobs": "\"**/*.md\" \"Pasted*/**/*.md\" \"Pasted.Docs/**/*.md\" \"!node_modules/**\""
+    },
+    {
+      "name": "Tuxedo",
+      "sonarProjectKey": "bmazzarol_Tuxedo",
+      "docsProjectPath": "Tuxedo.Docs",
+      "csProjFileName": "Tuxedo.Docs.csproj",
+      "markdownGlobs": "\"**/*.md\" \"Tuxedo*/**/*.md\" \"!node_modules/**\""
+    },
+    {
+      "name": "Quacker",
+      "path": "projects/dotnet/Quacker",
+      "sonarProjectKey": "bmazzarol_Quacker",
+      "docsProjectPath": null,
+      "csProjFileName": null,
+      "markdownGlobs": "\"**/*.md\" \"!node_modules/**\"",
+      "notes": "not registered as a submodule yet; add with scripts/add-dotnet-project.nu"
+    }
+  ]
+}
