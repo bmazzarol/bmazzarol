@@ -6,15 +6,16 @@ they are; they just receive their configuration from this repo.
 
 ## What lives where
 
-| Thing                          | Source of truth                              |
-| ------------------------------ | -------------------------------------------- |
-| Repo list + per-repo settings  | `.github/ci/repos.json`                      |
-| Workflow files                 | `.github/ci/workflows/*.yml`                 |
-| Landing page copy and logos    | `.github/ci/config/landing-copy.json`        |
-| docfx theme (css, js, fonts)   | `docs/theme/public`                          |
-| docfx global metadata          | `.github/ci/config/docfx-global-metadata.json` |
-| Secrets (Sonar, NuGet, ...)    | `~/.config/bmazzarol/ci-secrets.env` locally, or the root repo's secrets in CI |
-| Shared CI actions              | `.github/actions/*`                          |
+| Thing | Source of truth |
+| --- | --- |
+| Repo list + per-repo settings | `.github/ci/repos.json` |
+| Workflow files | `.github/ci/workflows/*.yml` |
+| Landing page copy and logos | `.github/ci/config/landing-copy.json` |
+| docfx theme (css, js, fonts) | `docs/theme/public` |
+| docfx global metadata | `.github/ci/config/docfx-global-metadata.json` |
+| Git hooks (husky) | `.github/ci/config/husky/*` |
+| Secrets (Sonar, NuGet, ...) | `~/.config/bmazzarol/ci-secrets.env` locally, or this repo's secrets in CI |
+| Shared CI actions | `.github/actions/*` |
 
 The workflow templates are identical for every repo. Values that used to be
 hard-coded in each repo's workflow (Sonar project key, docs path, markdown
@@ -26,18 +27,24 @@ Repository variables used by the templates:
 - `SONAR_PROJECT_KEY`
 - `DOCS_PROJECT_PATH`
 - `CS_PROJ_FILE_NAME`
-- `MARKDOWN_GLOBS`
 - `DOTNET_VERSION` - the .NET SDK channel every workflow installs (currently
-  `11.0.x`). `setup-dotnet` resolves the channel to the newest release in it,
-  so this picks up 11.0 GA automatically without touching the templates.
+  `11.0.x`). `setup-dotnet` resolves the channel to the newest release in it, so
+  this picks up 11.0 GA automatically without touching the templates.
 - `MARKDOWN_GLOBS` - `markdownlint-cli2` target specs. Ordering matters: negations
   only remove files that were already included, so put includes first and the
   `!` exclusions afterwards.
 
 `.github/ci/config/.markdownlint-cli2.jsonc` is the shared markdownlint config.
 `workflows apply` copies it into every repo root, so lint rules are centralised
-here too (currently: MD013 line length off, because docfx articles and tables
-run long).
+here too:
+
+- `MD013` (line length) off - docfx articles and tables run long.
+- `MD041` (first line must be a heading) off - every landing page starts with the
+  project logo, then the title.
+
+`.github/ci/config/husky/` holds the `commit-msg` and `pre-commit` hooks copied
+into each repo's `.husky/`. The `task-runner.json` stays per-repo because its
+globs and docs paths differ.
 
 `.github/ci/config/landing-copy.json` is the shared hero for every project: the
 title, the one line tagline, the description and which icon the project uses.
@@ -120,8 +127,9 @@ The vault file is never committed; it is a plain `KEY=value` file with mode
 
 ## Automated sync
 
-`.github/workflows/ci-sync.yml` runs daily and on demand. It reads
-`SONAR_TOKEN` / `NUGET_API_KEY` from this repo's own secrets and pushes them to
-every repo in `repos.json`. For that to work, `CI_SYNC_TOKEN` must be a token
-with *Secrets: Read & Write* on the target repos - the job's built-in
-`GITHUB_TOKEN` cannot write secrets into sibling repositories.
+`.github/workflows/ci-sync.yml` runs daily and on demand. It checks out the
+submodules and reports workflow, docfx theme and landing copy drift as workflow
+warnings, so the scheduled job is useful even before `CI_SYNC_TOKEN` exists.
+Secrets are only pushed when `CI_SYNC_TOKEN` (a token with *Secrets: Read & Write*
+on the target repos) is set on this repo - the job's built-in `GITHUB_TOKEN`
+cannot write secrets into sibling repositories.

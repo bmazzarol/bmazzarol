@@ -45,6 +45,7 @@ SHARED_CONFIG="${CI_SHARED_CONFIG:-$ROOT/.github/ci/config}"
 DOCS_METADATA="${CI_DOCS_METADATA:-$ROOT/.github/ci/config/docfx-global-metadata.json}"
 DOCS_THEME="${CI_DOCS_THEME:-$ROOT/docs/theme/public}"
 LANDING_COPY="${CI_LANDING_COPY:-$ROOT/.github/ci/config/landing-copy.json}"
+HUSKY_CONFIG="${CI_HUSKY_CONFIG:-$ROOT/.github/ci/config/husky}"
 VAULT="${CI_SECRETS_FILE:-${XDG_CONFIG_HOME:-$HOME/.config}/bmazzarol/ci-secrets.env}"
 
 FILTER_REPOS=""
@@ -341,14 +342,13 @@ cmd_workflows() {
       ensure_main "$path"
     fi
     diffs=0
-    synced=""
-    for tpl in "$TEMPLATES"/*.yml "$SHARED_CONFIG"/.* "$SHARED_CONFIG"/*; do
+    synced=()
+    for tpl in "$TEMPLATES"/*.yml "$SHARED_CONFIG"/.* "$SHARED_CONFIG"/* "$HUSKY_CONFIG"/*; do
       [[ -f "$tpl" ]] || continue
       name="$(basename "$tpl")"
-      # the docfx metadata file is applied by `docs apply`, not copied to a repo root
-      # root-only sources of truth: the landing copy is applied to each repo's
-      # README/docs page by scripts/apply-landing-copy.py, the docfx metadata
-      # is written into docfx.json by `docs apply`
+      # root-only sources of truth: the docfx metadata is written into docfx.json by
+      # `docs apply`, and the landing copy is applied to each repo's README/docs page
+      # by scripts/apply-landing-copy.py. Neither is copied into a repo as a file.
       [[ "$name" == "docfx-global-metadata.json" ]] && continue
       [[ "$name" == "landing-copy.json" ]] && continue
       if [[ "$tpl" == "$TEMPLATES"/* ]]; then
@@ -357,22 +357,26 @@ cmd_workflows() {
           printf '  %-32s %s skipped (no docs project)\n' "$r" "$name"
           continue
         fi
-        local_file="$ROOT/$path/.github/workflows/$name"
+        rel=".github/workflows/$name"
+      elif [[ "$tpl" == "$HUSKY_CONFIG"/* ]]; then
+        rel=".husky/$name"
       else
-        local_file="$ROOT/$path/$name"
+        rel="$name"
       fi
+      local_file="$ROOT/$path/$rel"
       if [[ ! -f "$local_file" ]]; then
-        printf '  %-32s %s missing\n' "$r" "$name"
+        printf '  %-32s %s missing\n' "$r" "$rel"
         diffs=1
-        if [[ "$tpl" != "$TEMPLATES"/* ]]; then synced="$synced $name"; fi
+        synced+=("$rel")
       elif ! diff -q "$tpl" "$local_file" >/dev/null; then
-        printf '  %-32s %s differs\n' "$r" "$name"
+        printf '  %-32s %s differs\n' "$r" "$rel"
         diffs=1
-        if [[ "$tpl" != "$TEMPLATES"/* ]]; then synced="$synced $name"; fi
+        synced+=("$rel")
       fi
       if [[ "$action" == "apply" ]]; then
         mkdir -p "$(dirname "$local_file")"
         cp "$tpl" "$local_file"
+        [[ "$tpl" == "$HUSKY_CONFIG"/* ]] && chmod +x "$local_file"
       fi
     done
     if (( diffs == 0 )); then
@@ -383,7 +387,7 @@ cmd_workflows() {
       printf '  %-32s templates written\n' "$r"
       if [[ "$commit" == "--commit" ]]; then
         git -C "$ROOT/$path" add .github/workflows
-        for cfg in $synced; do
+        for cfg in "${synced[@]}"; do
           git -C "$ROOT/$path" add "$cfg"
         done
         if git -C "$ROOT/$path" diff --cached --quiet; then
