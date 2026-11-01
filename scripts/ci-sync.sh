@@ -319,6 +319,15 @@ repo_path() {
   printf '%s' "$p"
 }
 
+# Submodules are checked out detached at their pinned commit. Any write into a
+# submodule has to start from the branch we actually push to.
+ensure_main() {
+  p="$ROOT/$1"
+  [[ -d "$p/.git" ]] || return 0
+  git -C "$p" checkout main >/dev/null 2>&1 || true
+  git -C "$p" pull origin main >/dev/null 2>&1 || true
+}
+
 cmd_workflows() {
   action="${1:-check}"
   commit="${2:-}"
@@ -327,6 +336,9 @@ cmd_workflows() {
     if [[ -z "$path" ]]; then
       printf '  %-32s no local checkout, skipping\n' "$r"
       continue
+    fi
+    if [[ "$action" == "apply" ]]; then
+      ensure_main "$path"
     fi
     diffs=0
     synced=""
@@ -403,6 +415,9 @@ cmd_docs() {
     if [[ -z "$path" || -z "$docs" || "$docs" == "null" ]]; then
       printf '  %-32s no docs project, skipping\n' "$r"
       continue
+    fi
+    if [[ "$action" == "apply" ]]; then
+      ensure_main "$path"
     fi
 
     cfg="$ROOT/$path/$docs/docfx.json"
@@ -497,6 +512,10 @@ cmd_landing() {
   [[ -f "$LANDING_COPY" ]] || die "missing landing copy: $LANDING_COPY"
 
   if [[ "$action" == "apply" ]]; then
+    for r in $(target_repos); do
+      path="$(repo_path "$r")"
+      [[ -n "$path" ]] && ensure_main "$path"
+    done
     python3 "$script" --write
     for r in $(target_repos); do
       path="$(repo_path "$r")"

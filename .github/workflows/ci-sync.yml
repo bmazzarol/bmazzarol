@@ -17,6 +17,9 @@ jobs:
       NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          # the drift checks below need the submodule checkouts
+          submodules: true
 
       - name: Preflight
         run: |
@@ -37,3 +40,26 @@ jobs:
       - name: Report drift
         if: ${{ env.GH_TOKEN != '' }}
         run: ./scripts/ci-sync.sh check
+
+      - name: Report workflow template drift
+        run: |
+          ./scripts/ci-sync.sh workflows check ||
+            echo "::warning::some repos are out of step with the workflow templates"
+
+      - name: Report docfx theme and metadata drift
+        run: |
+          ./scripts/ci-sync.sh docs check ||
+            echo "::warning::some docs sites are out of step with the shared docfx theme and metadata"
+
+      - name: Report landing copy drift
+        run: |
+          ./scripts/ci-sync.sh landing check ||
+            echo "::warning::a README or docs landing page has drifted from the shared copy"
+
+      - name: Repair drift
+        if: ${{ env.GH_TOKEN != '' }}
+        run: |
+          ./scripts/ci-sync.sh workflows apply --commit
+          ./scripts/ci-sync.sh docs apply
+          ./scripts/ci-sync.sh landing apply
+          git -C "$GITHUB_WORKSPACE" commit -m "chore: bump submodule pointers after ci-sync" || true
