@@ -8,6 +8,8 @@ on:
 jobs:
   sync:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     env:
       # A PAT (or fine-grained token) with "Secrets: Read & Write" on every
       # target repo. GITHUB_TOKEN from this repo cannot write secrets into the
@@ -62,4 +64,11 @@ jobs:
           ./scripts/ci-sync.sh workflows apply --commit
           ./scripts/ci-sync.sh docs apply
           ./scripts/ci-sync.sh landing apply
-          git -C "$GITHUB_WORKSPACE" commit -m "chore: bump submodule pointers after ci-sync" || true
+          # the submodule commits are pushed by the script; this repo only needs
+          # the pointer bumps, and only if there are any
+          if ! git -C "$GITHUB_WORKSPACE" diff --cached --quiet; then
+            git -C "$GITHUB_WORKSPACE" commit -m "chore(ci): bump submodule pointers after ci-sync"
+            git -C "$GITHUB_WORKSPACE" push origin main
+          else
+            echo "No submodule pointer changes to commit."
+          fi
