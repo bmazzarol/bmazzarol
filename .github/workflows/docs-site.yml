@@ -39,7 +39,6 @@ jobs:
         shell: bash
         run: |
           cd docs
-          dotnet docfx metadata docfx.json
           dotnet docfx build docfx.json --warningsAsErrors
       - name: Upload pages artifact
         uses: actions/upload-pages-artifact@v3
