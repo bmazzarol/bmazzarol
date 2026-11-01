@@ -26,3 +26,11 @@ runs:
           npm i
         fi
         npx markdownlint-cli2 ${{ inputs.targetMdFiles }}
+    - name: Check table structure
+      shell: bash
+      run: |
+        # markdownlint does not parse tables, so a header split over several
+        # lines - which docfx renders as a plain paragraph - passes lint and
+        # ships. This checks that every table has a delimiter row as its second
+        # row and that all of its rows have the same number of cells.
+        python3 "$GITHUB_ACTION_PATH/check-tables.py" ${{ inputs.targetMdFiles }}

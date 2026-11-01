@@ -65,7 +65,7 @@ and skips the pushes.
 | Test Reporter | turns the CI Build results into a status check |
 | Check Code Format | runs CSharpier over the C# sources |
 | Check Commit Message | enforces the conventional commit format |
-| Check Markdown | runs markdownlint over the documentation |
+| Check Markdown | runs markdownlint, then a table structure check, over the documentation |
 | Check Docs | builds the docfx site with warnings as errors |
 | Build and Deploy Docs | publishes the site to GitHub Pages |
 | CD Build | packs a release and pushes it to NuGet |
