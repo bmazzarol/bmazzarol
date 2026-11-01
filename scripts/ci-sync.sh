@@ -361,10 +361,14 @@ cmd_workflows() {
         for f in $synced; do
           git -C "$ROOT/$path" add "$f"
         done
-        git -C "$ROOT/$path" commit --no-verify -m "chore(ci): sync workflow templates and shared config from bmazzarol/bmazzarol"
-        git -C "$ROOT/$path" push origin main
-        if git config -f "$ROOT/.gitmodules" --get-regexp path | grep -q "$path"; then
-          git -C "$ROOT" add "$path"
+        if git -C "$ROOT/$path" diff --cached --quiet; then
+          printf '  %-32s nothing to commit\n' "$r"
+        else
+          git -C "$ROOT/$path" commit --no-verify -m "chore(ci): sync workflow templates and shared config from bmazzarol/bmazzarol"
+          git -C "$ROOT/$path" push origin main
+          if git config -f "$ROOT/.gitmodules" --get-regexp path | grep -q "$path"; then
+            git -C "$ROOT" add "$path"
+          fi
         fi
       fi
     fi
