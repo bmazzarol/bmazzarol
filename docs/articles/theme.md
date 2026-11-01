@@ -10,7 +10,7 @@ The canonical copy of the theme is in the root repository:
 
 ```text
 docs/theme/public/main.css   layout, typography, code, tables
-docs/theme/public/main.js    nav icon links (GitHub, home)
+docs/theme/public/main.js    nav icon links (GitHub, and home back to the profile site)
 ```
 
 Each project keeps a local copy under its own docfx template:
