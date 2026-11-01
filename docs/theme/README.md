@@ -6,9 +6,18 @@ not edit their own copy; `ci-sync.sh docs apply` copies these files into
 
 ```text
 public/main.css    layout, typography, code, tables
-public/main.js     nav icon links
+public/main.js     nav icon links, accent colour sampled from the logo
 public/fonts/      self-hosted web fonts
 ```
+
+## Accent
+
+`main.js` rasterises the project's logo at 64x64, histograms the hue of every
+pixel that carries colour, and writes the dominant one into `--bm-accent` (and
+`--bm-accent-dark` for the dark theme). The lightness is chosen so the tone is
+the most vivid version of that hue that still passes a 4.5:1 contrast ratio
+against the page, so links never become unreadable. A logo with no colour, like
+the monogram, falls back to docfx's own blue.
 
 ## Fonts
 
