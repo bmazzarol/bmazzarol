@@ -64,6 +64,7 @@ so what you see locally is exactly what will ship.
 
 | Area | Behaviour |
 | --- | --- |
+| Typography | Inter for prose, JetBrains Mono for code, both self-hosted (~67 KB total) |
 | Article | single column, capped at 70 characters |
 | Navigation | transparent bar, 1.75rem logo, thin bottom rule |
 | Headings | size and weight only, no borders or background |

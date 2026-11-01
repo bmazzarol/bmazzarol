@@ -12,6 +12,28 @@
   5. Never add decoration that does not help the reader decide or find.
 */
 
+/*
+  Self-hosted fonts (OFL licensed, see docs/theme/README.md):
+    Inter            400-700 variable, latin subset, 37 KB
+    JetBrains Mono   400-600 variable, latin subset, 30 KB
+  Paths are relative to public/main.css, which is where docfx puts this file.
+*/
+@font-face {
+  font-family: "Inter";
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+  src: url("fonts/inter-latin.var.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  font-weight: 400 600;
+  font-style: normal;
+  font-display: swap;
+  src: url("fonts/jetbrains-mono-latin.var.woff2") format("woff2");
+}
+
 :root {
   --bm-measure: 70ch;
   --bm-radius: 8px;
@@ -23,7 +45,7 @@
 /* --------------------------------------------------------------------- base */
 
 body {
-  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+  font-family: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
     "Helvetica Neue", Arial, sans-serif;
   line-height: 1.65;
 }
@@ -138,7 +160,7 @@ article blockquote {
 pre,
 code,
 kbd {
-  font-family: ui-monospace, "Cascadia Mono", "JetBrains Mono", SFMono-Regular,
+  font-family: "JetBrains Mono", ui-monospace, "Cascadia Mono", SFMono-Regular,
     Consolas, monospace;
   font-size: 0.875rem;
 }
