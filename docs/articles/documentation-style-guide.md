@@ -58,6 +58,39 @@ The README uses the same title, tagline and description, with the logo above the
 title and the badge shields under it. Both are written by the same script, so a
 repo and its docs site always open with the same sentence.
 
+### The README that ships in the package
+
+Every packable project has its own `README.md` next to the source. That is the
+file NuGet renders, because `Common.Release.props` packs it with
+`PackageReadmeFile`. It is written from the same copy file, and opens like this:
+
+```text
+![Cutout](https://raw.githubusercontent.com/bmazzarol/Cutout/main/scissors-small-icon.png)
+
+# Cutout
+
+**Templating that costs nothing at runtime.**
+
+A source generator that renders Liquid style templates into a StringBuilder at
+compile time ...
+
+[![Nuget](https://img.shields.io/nuget/v/Cutout)](https://www.nuget.org/packages/Cutout/)
+
+dotnet add package Cutout
+
+[Getting started](...) - [Full documentation](...)
+```
+
+Two things are different from the repo README:
+
+- the logo is a remote URL, because the icon file is not inside the package
+- the install command and the docs links are in the hero, because the reader is
+  holding the package and wants to start
+
+Everything below the first `H2` is hand written and the script leaves it alone.
+A package README still has to answer the three questions: what it is, the
+shortest working example, and what it does not do.
+
 ## Voice
 
 - Write in the second person: "you pass a strategy", not "the user passes a
@@ -101,6 +134,8 @@ An example is a claim that the code works. Treat it as a test.
 - [ ] The first code block runs on its own.
 - [ ] The example shows its output.
 - [ ] There is a "what this does not do" section for anything with limits.
+- [ ] The package README says the same thing as the repo README, and has its own
+      working example.
 - [ ] `dotnet docfx build docfx.json --warningsAsErrors` is clean.
 - [ ] `markdownlint-cli2` reports no errors.
 - [ ] Every link in the toc resolves, and every article is in the toc.

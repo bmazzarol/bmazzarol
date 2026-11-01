@@ -14,7 +14,7 @@ hand edited in a project repo.
 | Composite actions | `.github/actions/` | referenced by every workflow, never copied |
 | docfx metadata | `.github/ci/config/docfx-global-metadata.json` | merged into each `docfx.json` by `docs apply` |
 | docfx theme | `docs/theme/public/` | copied into each docs project's `template/public` |
-| Landing copy | `.github/ci/config/landing-copy.json` | written into each README and each docs `index.md` |
+| Landing copy | `.github/ci/config/landing-copy.json` | written into each README, each docs landing page, and each NuGet package README |
 | Project icons | `docs/theme/images/` | copied in by `docs apply` |
 
 The workflows read per-repo values from repository variables

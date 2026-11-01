@@ -5,7 +5,14 @@
     "description": "A test DSL for C# that turns arrange-act-assert into a composable pipeline, and disposes everything the arrange and act stages create.",
     "package": "BunsenBurner",
     "icon": "fire-icon.png",
-    "gettingStarted": "articles/getting-started.html"
+    "gettingStarted": "articles/getting-started.html",
+    "packageReadmes": [
+      {
+        "path": "BunsenBurner/README.md",
+        "package": "BunsenBurner",
+        "icon": "fire-icon-small.png"
+      }
+    ]
   },
   "Cutout": {
     "title": "Cutout",
@@ -13,7 +20,14 @@
     "description": "A source generator that renders Liquid style templates into a StringBuilder at compile time, so generated code keeps its indentation without a template engine dependency.",
     "package": "Cutout",
     "icon": "scissors-icon.png",
-    "gettingStarted": "articles/getting-started.html"
+    "gettingStarted": "articles/getting-started.html",
+    "packageReadmes": [
+      {
+        "path": "Cutout/README.md",
+        "package": "Cutout",
+        "icon": "scissors-small-icon.png"
+      }
+    ]
   },
   "Eon": {
     "title": "Eon",
@@ -21,7 +35,14 @@
     "description": "A Schedule is a stream of durations. Compose it, iterate it, await it, and never start a thread.",
     "package": "eon",
     "icon": "schedule-icon.png",
-    "gettingStarted": "articles/getting-started.html"
+    "gettingStarted": "articles/getting-started.html",
+    "packageReadmes": [
+      {
+        "path": "Eon/README.md",
+        "package": "eon",
+        "icon": "schedule-icon-small.png"
+      }
+    ]
   },
   "Http-BuildR": {
     "title": "Http BuildR",
@@ -29,7 +50,25 @@
     "description": "A fluent builder for HttpRequestMessage and HttpResponseMessage built on System.Net.Http alone, with no dependencies and no wrapper types.",
     "package": "HttpBuildR.Request",
     "icon": "construction-icon.png",
-    "gettingStarted": "articles/request/request-overview.html"
+    "gettingStarted": "articles/request/request-overview.html",
+    "packageReadmes": [
+      {
+        "path": "src/Request/HttpBuildR.Request/README.md",
+        "package": "HttpBuildR.Request",
+        "icon": "construction-icon-small.png",
+        "description": "Extension methods that build an HttpRequestMessage out of a chain, using nothing but System.Net.Http.",
+        "title": "Http BuildR Request",
+        "gettingStarted": "articles/request/request-overview.html"
+      },
+      {
+        "path": "src/Response/HttpBuildR.Response/README.md",
+        "package": "HttpBuildR.Response",
+        "icon": "construction-icon-small.png",
+        "description": "Extension methods that build a HttpResponseMessage out of a chain, using nothing but System.Net.Http. The usual place for this is a test that needs an expected response.",
+        "title": "Http BuildR Response",
+        "gettingStarted": "articles/response/response-overview.html"
+      }
+    ]
   },
   "Icicle": {
     "title": "Icicle",
@@ -37,7 +76,14 @@
     "description": "A TaskScope groups related child tasks, runs them together, and returns a ResultHandle for each promised value.",
     "package": "Icicle",
     "icon": "icicles-icon.png",
-    "gettingStarted": "articles/getting-started.html"
+    "gettingStarted": "articles/getting-started.html",
+    "packageReadmes": [
+      {
+        "path": "Icicle/README.md",
+        "package": "Icicle",
+        "icon": "icicles-icon-small.png"
+      }
+    ]
   },
   "Pasted": {
     "title": "Pasted",
@@ -45,7 +91,14 @@
     "description": "A source generator that turns text files into string constants at compile time, for source generators and AOT binaries that have no assembly directory to read from at runtime.",
     "package": "Pasted",
     "icon": "glue-icon.png",
-    "gettingStarted": "getting-started.html"
+    "gettingStarted": "getting-started.html",
+    "packageReadmes": [
+      {
+        "path": "Pasted/README.md",
+        "package": "Pasted",
+        "icon": "glue-small-icon.png"
+      }
+    ]
   },
   "Polyglot.Notebook.Docfx.Plugin": {
     "title": "Polyglot Notebook docfx Plugin",
@@ -54,7 +107,14 @@
     "package": "Polyglot.Notebook.Docfx.Plugin",
     "icon": "notebook-icon.png",
     "gettingStarted": "getting-started.html",
-    "docsLanding": "index.ipynb"
+    "docsLanding": "index.ipynb",
+    "packageReadmes": [
+      {
+        "path": "Polyglot.Notebook.Docfx.Plugin/README.md",
+        "package": "Polyglot.Notebook.Docfx.Plugin",
+        "icon": "notebook-icon-small.png"
+      }
+    ]
   },
   "Tuxedo": {
     "title": "Tuxedo",
@@ -62,7 +122,14 @@
     "description": "A source generator that turns a predicate into a refined type, so a value of that type has already passed the check.",
     "package": "tuxedo.sourcegenerator",
     "icon": "jacket-icon.png",
-    "gettingStarted": "getting-started.html"
+    "gettingStarted": "getting-started.html",
+    "packageReadmes": [
+      {
+        "path": "Tuxedo.SourceGenerator/README.md",
+        "package": "Tuxedo.SourceGenerator",
+        "icon": "jacket-small-icon.png"
+      }
+    ]
   },
   "docfx.result-snippets": {
     "title": "Docfx Result Snippets",
@@ -70,7 +137,14 @@
     "description": "Saves the output of a method call to markdown, which a docfx page can include as a table, chart, class diagram or plain snippet.",
     "package": "Docfx.ResultSnippets",
     "icon": "downloadable-logo.png",
-    "gettingStarted": "articles/getting-started.html"
+    "gettingStarted": "articles/getting-started.html",
+    "packageReadmes": [
+      {
+        "path": "Docfx.ResultSnippets/README.md",
+        "package": "Docfx.ResultSnippets",
+        "icon": "downloadable-small-logo.png"
+      }
+    ]
   },
   "Quacker": {
     "title": "Quacker",
@@ -78,6 +152,13 @@
     "description": "A source generator that specialises a generic method for every combination of argument types it is called with, so a member can be invoked on a type parameter the compiler never had to know about.",
     "package": null,
     "icon": "duck-icon.png",
-    "gettingStarted": null
+    "gettingStarted": null,
+    "packageReadmes": [
+      {
+        "path": "Quacker/README.md",
+        "package": null,
+        "icon": "duck-small-icon.png"
+      }
+    ]
   }
 }

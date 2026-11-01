@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-apply-landing-copy.py - rewrite the hero of every README and docs landing page
-from the shared copy in .github/ci/config/landing-copy.json.
+apply-landing-copy.py - rewrite the hero of every README, docs landing page and
+NuGet package README from the shared copy in .github/ci/config/landing-copy.json.
 
 Usage:
   ./scripts/apply-landing-copy.py --check            # report heroes that differ
@@ -12,8 +12,15 @@ The README keeps its badge shields, the docs landing page does not. Both get the
 same title, tagline, description and logo so a repo and its docs site read the
 same way.
 
+A repo's README hero is rewritten by this script. Everything below the first H2
+is hand written and is left alone.
+
 Docs landing pages are markdown (index.md) or Polyglot Notebook markdown cells
 (index.ipynb). Both are rewritten from the same copy.
+
+Package READMEs (the README.md packed into a NuGet package by
+Common.Release.props) get the same title, tagline and description, plus the
+install command and a link to the docs site.
 """
 
 import argparse
@@ -30,6 +37,7 @@ REPOS_FILE = os.path.join(ROOT, ".github/ci/repos.json")
 ICONS_DIR = os.path.join(ROOT, "docs/theme/images")
 
 OWNER = "bmazzarol"
+ICON_BASE = f"https://raw.githubusercontent.com/{OWNER}/"
 
 BADGE_RE = re.compile(r"\[!\[[^\]]*\]\([^)]*\)\]\([^)]*\)")
 DIV_START = re.compile(r'<div align="center">')
@@ -169,6 +177,70 @@ def notebook_hero(copy):
     ]
 
 
+def package_hero(repo, copy, entry, docs_url, getting_started):
+    """Hero for a README that ships inside a NuGet package.
+
+    The icon cannot be a relative path, because the icon is not packed into the
+    package, so it points at the repo on GitHub.
+    """
+    title = entry.get("title") or copy["title"]
+    description = entry.get("description") or copy["description"]
+    relative = entry.get("gettingStarted")
+    if relative and docs_url:
+        getting_started = f"{docs_url}{relative}"
+    hero = [
+        f"![{title}]({ICON_BASE}{repo}/main/{entry['icon']})",
+        "",
+        f"# {title}",
+        "",
+        f"**{copy['tagline']}**",
+        "",
+        description,
+        "",
+    ]
+    package = entry.get("package")
+    if package:
+        hero += [
+            f"[![Nuget](https://img.shields.io/nuget/v/{package})]"
+            f"(https://www.nuget.org/packages/{package}/)",
+            "",
+            "```shell",
+            f"dotnet add package {package}",
+            "```",
+            "",
+        ]
+    links = []
+    if getting_started:
+        links.append(f"[Getting started]({getting_started})")
+    if docs_url:
+        links.append(f"[Full documentation]({docs_url})")
+    if links:
+        hero += [" - ".join(links), ""]
+    return hero
+
+
+def rewrite_package_readme(path, hero, label, check_only, show_diff=False):
+    """Replace everything before the first H2 of a package README."""
+    if not os.path.isfile(path):
+        return f"{label}: missing {os.path.relpath(path, ROOT)}"
+    with open(path, encoding="utf-8", newline="") as fh:
+        text = fh.read()
+    lines = text.splitlines()
+    first_h2 = next((i for i, line in enumerate(lines) if line.startswith("## ")), len(lines))
+    current = [line for line in lines[:first_h2] if line.strip()]
+    wanted = [line for line in hero if line.strip()]
+    if current == wanted:
+        return f"{label}: already canonical"
+    if check_only:
+        if show_diff:
+            print("\n".join(difflib.unified_diff(lines[:first_h2], hero, lineterm="")))
+        return f"{label}: hero differs"
+    new = "\n".join(hero + lines[first_h2:]).rstrip("\n") + "\n"
+    with open(path, "w", encoding="utf-8", newline="") as fh:
+        fh.write(new)
+    return f"{label}: hero updated"
+
+
 def rewrite_notebook(path, hero, label, check_only, show_diff=False):
     if not os.path.isfile(path):
         return f"{label}: missing {os.path.relpath(path, ROOT)}"
@@ -278,6 +350,20 @@ def main():
         readme = os.path.join(repo_dir, "README.md")
         result = rewrite(readme, readme_hero(repo, c, sonar, docs_url, getting_started), "README", check_only, args.diff)
         print(f"{repo:<32} {result}")
+
+        for entry in c.get("packageReadmes", []):
+            package_readme = os.path.join(repo_dir, entry["path"])
+            if not os.path.isfile(package_readme):
+                print(f"{repo:<32} package readme {entry['path']} missing")
+                continue
+            result = rewrite_package_readme(
+                package_readme,
+                package_hero(repo, c, entry, docs_url, getting_started),
+                entry["path"],
+                check_only,
+                args.diff,
+            )
+            print(f"{repo:<32} {result}")
 
         if docs_path:
             landing = c.get("docsLanding", "index.md")
