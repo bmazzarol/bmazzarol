@@ -1,0 +1,32 @@
+name: Dotnet Probe
+
+on:
+  workflow_dispatch:
+    inputs:
+      channel:
+        description: dotnet channel to install
+        default: "11.0.x"
+        required: false
+
+jobs:
+  probe:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ inputs.channel || '11.0.x' }}
+
+      - name: Report
+        run: |
+          dotnet --version
+          dotnet --list-sdks
+          dotnet --list-runtimes
+          mkdir -p /tmp/probe && cd /tmp/probe
+          dotnet new console -n probe --force
+          cd probe
+          cat > Program.cs <<'EOF'
+          using System;
+          Console.WriteLine($"runtime {Environment.Version}");
+          EOF
+          dotnet run
