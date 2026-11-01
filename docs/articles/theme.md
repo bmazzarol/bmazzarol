@@ -70,7 +70,7 @@ so what you see locally is exactly what will ship.
 | Masthead | the project logo floats beside the intro copy, not on a line of its own |
 | Navigation | transparent bar, 1.75rem logo, thin bottom rule |
 | Headings | size and weight only, no borders or background |
-| Code blocks | a tint barely above the page colour, faded out at both edges, no rules |
+| Code blocks | a tint barely above the page colour, a soft rule top and bottom, sides faded out |
 | Tables | hairline rules, muted header text |
 | Footer | quiet surface band, links back to the profile site |
 | Dark mode | inherits docfx/Bootstrap tokens, no extra work |
