@@ -12,11 +12,12 @@
   },
   "globs": [
     "**/*.md",
+    "!projects/**",
     "!**/node_modules/**",
     "!LICENSE.md",
     "!**/__examples__/**",
     "!**/_site/**",
-    "!.github/**",
+    "!**/.github/**",
     "!**/*.verified.md"
   ]
 }
