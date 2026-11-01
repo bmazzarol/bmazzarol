@@ -45,7 +45,7 @@ and is merged into each project's `globalMetadata`.
 | Next/previous article | on | the toc is a learning path, people read it end to end |
 | Site search | on | valuable once the API reference is generated |
 | Badge shields | removed from doc landing pages | status belongs in the README, not in the article |
-| "Edit this page" | not emitted | docfx has no source mapping for these pages, so the navbar carries the repository link instead |
+| "Edit this page" | kept, restyled | docfx links to the source markdown, which is where a reader should fix a mistake; the theme makes it as quiet as the footer |
 
 ## Previewing before it ships
 
