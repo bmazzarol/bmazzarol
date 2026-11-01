@@ -413,6 +413,16 @@ cmd_docs() {
       fi
     done
 
+    if [[ -d "$DOCS_THEME/../images" ]]; then
+      for img in "$DOCS_THEME/../images"/*.png; do
+        if [[ -f "$dest/../images/$(basename "$img")" ]] &&
+           ! cmp -s "$img" "$dest/../images/$(basename "$img")"; then
+          printf '  %-32s %s differs\n' "$r" "images/$(basename "$img")"
+          differs=1
+        fi
+      done
+    fi
+
     if [[ -f "$cfg" ]]; then
       for key in $(jq -r 'keys[]' "$DOCS_METADATA"); do
         want="$(jq -r --arg k "$key" '.[$k]' "$DOCS_METADATA")"
@@ -443,12 +453,24 @@ cmd_docs() {
 
     mkdir -p "$dest"
     cp "$DOCS_THEME/main.css" "$DOCS_THEME/main.js" "$dest"
+
+    logo="$(jq -r '.build.globalMetadata._appLogoPath // empty' "$cfg")"
+    if [[ -n "$logo" ]]; then
+      canon="$DOCS_THEME/../images/$(basename "$logo")"
+      if [[ -f "$canon" ]]; then
+        mkdir -p "$(dirname "$ROOT/$path/$docs/$logo")"
+        cp "$canon" "$ROOT/$path/$docs/$logo"
+      fi
+    fi
     tmp="$(mktemp)"
     jq --indent 4 --argjson meta "$(cat "$DOCS_METADATA")" \
       '.build.globalMetadata = ((.build.globalMetadata // {}) + $meta)' "$cfg" > "$tmp"
     mv "$tmp" "$cfg"
 
     git -C "$ROOT/$path" add "$docs/template/public" "$docs/docfx.json"
+    if [[ -n "$logo" ]]; then
+      git -C "$ROOT/$path" add "$docs/$logo"
+    fi
     if git -C "$ROOT/$path" diff --cached --quiet; then
       printf '  %-32s nothing to commit\n' "$r"
     else

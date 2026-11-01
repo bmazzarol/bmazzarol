@@ -73,5 +73,19 @@ so what you see locally is exactly what will ship.
 | Footer | quiet surface band, links back to the profile site |
 | Dark mode | inherits docfx/Bootstrap tokens, no extra work |
 
+## Icons
+
+Project icons are normalised so every logo sits in the same box: transparent
+padding is trimmed, the artwork is scaled so its longest side fills a 128x128
+canvas, and it is centred with 6px of breathing room. Without this, the glue
+stick renders half the size of the notebook and the navbar looks uneven.
+
+Canonical icons live in `docs/theme/images` and are copied into each project's
+`<Docs>/images` by `docs apply`:
+
+```bash
+./scripts/normalise-icons.py <png...> -o docs/theme/images
+```
+
 Design rule: if an element does not help the reader find something or decide
 something, remove it.
