@@ -54,6 +54,10 @@ intro copy at 44px. It is not repeated anywhere else on the page: the navbar
 and the favicon already carry it. Badge shields do not belong here; they are
 for the README.
 
+The README uses the same title, tagline and description, with the logo above the
+title and the badge shields under it. Both are written by the same script, so a
+repo and its docs site always open with the same sentence.
+
 ## Voice
 
 - Write in the second person: "you pass a strategy", not "the user passes a

@@ -1,8 +1,8 @@
 {
   "Bunsen-Burner": {
     "title": "Bunsen Burner",
-    "tagline": "Turn the heat up on your old tests.",
-    "description": "A test framework for C# that turns arrange-act-assert into a composable pipeline, and disposes everything the arrange step created for you.",
+    "tagline": "Arrange, act and assert, enforced by the compiler.",
+    "description": "A test DSL for C# that turns arrange-act-assert into a composable pipeline, and disposes everything the arrange and act stages create.",
     "package": "BunsenBurner",
     "icon": "fire-icon.png",
     "gettingStarted": "articles/getting-started.html"
@@ -25,8 +25,8 @@
   },
   "Http-BuildR": {
     "title": "Http BuildR",
-    "tagline": "Requests and responses, without the framework.",
-    "description": "A fluent builder for HttpRequestMessage and HttpResponseMessage built on System.Net.Http alone, with no dependencies and no extra allocations.",
+    "tagline": "Requests and responses, standard library only.",
+    "description": "A fluent builder for HttpRequestMessage and HttpResponseMessage built on System.Net.Http alone, with no dependencies and no wrapper types.",
     "package": "HttpBuildR.Request",
     "icon": "construction-icon.png",
     "gettingStarted": "articles/request/request-overview.html"
@@ -42,7 +42,7 @@
   "Pasted": {
     "title": "Pasted",
     "tagline": "Text files, baked into the binary.",
-    "description": "A source generator that turns text files into string constants at compile time, for source generators and AOT apps where there is no filesystem at runtime.",
+    "description": "A source generator that turns text files into string constants at compile time, for source generators and AOT binaries that have no assembly directory to read from at runtime.",
     "package": "Pasted",
     "icon": "glue-icon.png",
     "gettingStarted": "getting-started.html"

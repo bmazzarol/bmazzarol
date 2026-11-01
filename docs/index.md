@@ -12,10 +12,10 @@ page, worked examples, and an API reference generated from the source.
 
 ## Projects
 
-- ![Bunsen Burner icon](images/fire-icon.png) **[Bunsen Burner](https://bmazzarol.github.io/Bunsen-Burner/)** — arrange/act/assert testing in plain C#, with automatic disposal of everything the arrange step creates.
+- ![Bunsen Burner icon](images/fire-icon.png) **[Bunsen Burner](https://bmazzarol.github.io/Bunsen-Burner/)** — a test DSL that makes arrange-act-assert a composable pipeline and disposes what the arrange and act stages create.
 - ![Cutout icon](images/scissors-icon.png) **[Cutout](https://bmazzarol.github.io/Cutout/)** — source-generated templating for .NET: emit correctly indented code from a source generator without building strings by hand.
 - ![Eon icon](images/schedule-icon.png) **[Eon](https://bmazzarol.github.io/Eon/)** — a `Schedule` type for C# that encodes "run this every 15 minutes" as data you can test.
-- ![Http BuildR icon](images/construction-icon.png) **[Http BuildR](https://bmazzarol.github.io/Http-BuildR/)** — request and response builders built on the standard library only: no framework, no extra allocations.
+- ![Http BuildR icon](images/construction-icon.png) **[Http BuildR](https://bmazzarol.github.io/Http-BuildR/)** — request and response builders built on `System.Net.Http` alone, with no wrapper types.
 - ![Icicle icon](images/icicles-icon.png) **[Icicle](https://bmazzarol.github.io/Icicle/)** — structured concurrency for C#: a group of related tasks behaves as one unit of work.
 - ![Tuxedo icon](images/jacket-icon.png) **[Tuxedo](https://bmazzarol.github.io/Tuxedo/)** — a source generator that turns predicates into refined types, with no runtime dependency.
 - ![Pasted icon](images/glue-icon.png) **[Pasted](https://bmazzarol.github.io/Pasted/)** — embed text files (HTML, CSS, JavaScript) into C# source at compile time.

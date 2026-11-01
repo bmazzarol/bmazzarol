@@ -1,22 +1,16 @@
 # Ben Mazzarol
 
-Hi there! I'm Ben, a software engineer with a passion for building small
-libraries and tools that solve problems that I have run into.
-
-I hope you find something useful in my repositories!
-Please contact me if you have any questions or feedback.
+I build small .NET libraries and tools that solve problems I ran into. Each one
+is its own repository, documented with docfx and published to GitHub Pages.
 
 ## Monorepo
 
-This repository acts as a monorepo for all of my projects. Each project is
-a git submodule that can be found in the `projects/` directory.
+Every project is a git submodule under `projects/`. The repositories stay
+independent, but this one holds the CI templates, docfx theme, git hooks and
+documentation conventions they share, so a change to a lint rule, a workflow or
+the theme reaches every project in one commit.
 
-This allows me to manage all of my projects in one place, while still keeping
-them separate and independent. It makes updating dependencies and other
-chores much easier for me.
-
-It also allows me to enforce a degree of consistency across all of my projects,
-such as using the same linters, formatters, and CI/CD pipelines.
+Contributing is still per project, using the usual GitHub workflow.
 
 ## Projects
 
@@ -36,12 +30,9 @@ such as using the same linters, formatters, and CI/CD pipelines.
 ## Tooling
 
 The CI templates, the docfx theme, the hooks and the documentation style guide
-all live in this repository and are copied out to the projects:
+live in this repository and are copied out to the projects:
 
 - [Documentation style guide](https://bmazzarol.github.io/bmazzarol/articles/documentation-style-guide.html)
 - [The theme](https://bmazzarol.github.io/bmazzarol/articles/theme.html)
 - [Shared CI](https://bmazzarol.github.io/bmazzarol/articles/shared-ci.html)
 - `./scripts/ci-sync.sh` - writes the shared configuration into every project
-
-Contributing is still expected to be done on a per-project basis, using the
-well-known GitHub workflow.
