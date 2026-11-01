@@ -18,5 +18,9 @@ runs:
     - name: Run Markdownlint
       shell: bash
       run: |
-        npm i
+        # repos without a package.json have no local dev dependencies; npx
+        # fetches markdownlint-cli2 on demand in that case.
+        if [ -f package.json ]; then
+          npm i
+        fi
         npx markdownlint-cli2 ${{ inputs.targetMdFiles }}
