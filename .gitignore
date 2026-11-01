@@ -1,3 +1,8 @@
 .idea/
 /projects/dotnet/node_modules/
 *.DotSettings.user
+
+# docfx generated output for the profile site
+_site/
+docs/api/
+docs/_site/preview.png

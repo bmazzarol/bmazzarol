@@ -25,6 +25,8 @@
 #   ci-sync.sh settings                    push per-repo settings as repo variables
 #   ci-sync.sh workflows check             compare each repo to the templates
 #   ci-sync.sh workflows apply [--commit]  write the templates into each repo
+#   ci-sync.sh docs-theme check            report repos whose docfx theme differs
+#   ci-sync.sh docs-theme apply            copy docs/theme into every docs project
 #   ci-sync.sh status                      last workflow run per repo
 #
 # Options:
@@ -379,6 +381,60 @@ cmd_workflows() {
   fi
 }
 
+cmd_docs_theme() {
+  action="${1:-check}"
+  theme="$ROOT/docs/theme/public"
+  [[ -d "$theme" ]] || die "missing theme directory: $theme"
+
+  drift=0
+  for r in $(target_repos); do
+    path="$(repo_path "$r")"
+    docs="$(repo_setting "$r" docsProjectPath)"
+    if [[ -z "$path" || -z "$docs" || "$docs" == "null" ]]; then
+      printf '  %-32s no docs project, skipping\n' "$r"
+      continue
+    fi
+    dest="$ROOT/$path/$docs/template/public"
+    differs=0
+    for f in main.css main.js; do
+      if [[ ! -f "$dest/$f" ]]; then
+        printf '  %-32s %s missing\n' "$r" "$f"
+        differs=1
+      elif ! diff -q "$theme/$f" "$dest/$f" >/dev/null; then
+        printf '  %-32s %s differs\n' "$r" "$f"
+        differs=1
+      fi
+    done
+    if (( differs == 0 )); then
+      printf '  %-32s theme in sync\n' "$r"
+      continue
+    fi
+    drift=1
+    if [[ "$action" != "apply" ]]; then
+      continue
+    fi
+    if (( DRY_RUN )); then
+      printf '    [dry-run] would copy the theme into %s/%s/template/public\n' "$path" "$docs"
+      continue
+    fi
+    mkdir -p "$dest"
+    cp "$theme/main.css" "$theme/main.js" "$dest"
+    git -C "$ROOT/$path" add "$docs/template/public"
+    if git -C "$ROOT/$path" diff --cached --quiet; then
+      printf '  %-32s nothing to commit\n' "$r"
+    else
+      git -C "$ROOT/$path" commit --no-verify -m "docs(theme): sync the shared docfx theme from bmazzarol/bmazzarol"
+      git -C "$ROOT/$path" push origin main
+      git -C "$ROOT" add "$path"
+      printf '  %-32s theme applied and pushed\n' "$r"
+    fi
+  done
+
+  if (( drift )) && [[ "$action" == "check" ]]; then
+    return 1
+  fi
+}
+
 cmd_status() {
   for r in $(target_repos); do
     printf '== %s\n' "$r"
@@ -416,6 +472,7 @@ case "$cmd" in
   verify)    cmd_verify ;;
   settings)  cmd_settings ;;
   workflows) cmd_workflows "${rest[0]:-check}" "${rest[1]:-}" ;;
+  docs-theme) cmd_docs_theme "${rest[0]:-check}" ;;
   status)    cmd_status ;;
-  *)         die "unknown command: $cmd (try repos, vault, rotate, set, sync, check, settings, workflows, status)" ;;
+  *)         die "unknown command: $cmd (try repos, vault, rotate, set, sync, check, settings, workflows, docs-theme, status)" ;;
 esac

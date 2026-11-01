@@ -1,0 +1,31 @@
+items:
+  - name: Home
+    href: index.md
+  - name: Projects
+    items:
+      - name: Bunsen Burner
+        href: https://bmazzarol.github.io/Bunsen-Burner/
+      - name: Cutout
+        href: https://bmazzarol.github.io/Cutout/
+      - name: Eon
+        href: https://bmazzarol.github.io/Eon/
+      - name: Http BuildR
+        href: https://bmazzarol.github.io/Http-BuildR/
+      - name: Icicle
+        href: https://bmazzarol.github.io/Icicle/
+      - name: Tuxedo
+        href: https://bmazzarol.github.io/Tuxedo/
+      - name: Pasted
+        href: https://bmazzarol.github.io/Pasted/
+      - name: Polyglot Notebook docfx Plugin
+        href: https://bmazzarol.github.io/Polyglot.Notebook.Docfx.Plugin/
+      - name: docfx result snippets
+        href: https://bmazzarol.github.io/docfx.result-snippets/
+      - name: Quacker
+        href: https://github.com/bmazzarol/Quacker
+  - name: Writing documentation
+    items:
+      - name: Style guide
+        href: articles/documentation-style-guide.md
+      - name: Theme
+        href: articles/theme.md
