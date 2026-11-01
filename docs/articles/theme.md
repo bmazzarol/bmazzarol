@@ -66,9 +66,10 @@ so what you see locally is exactly what will ship.
 | --- | --- |
 | Typography | Inter for prose, JetBrains Mono for code, both self-hosted (~67 KB total) |
 | Article | single column, capped at 70 characters |
+| Masthead | the project logo floats beside the intro copy, not on a line of its own |
 | Navigation | transparent bar, 1.75rem logo, thin bottom rule |
 | Headings | size and weight only, no borders or background |
-| Code blocks | subtle surface, rounded, monospace at 0.875rem |
+| Code blocks | surface band with a top and bottom rule only, monospace at 0.875rem |
 | Tables | hairline rules, muted header text |
 | Footer | quiet surface band, links back to the profile site |
 | Dark mode | inherits docfx/Bootstrap tokens, no extra work |
