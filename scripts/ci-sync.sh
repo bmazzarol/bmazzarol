@@ -113,11 +113,12 @@ load_vault() {
 
 vault_write() { # name value
   mkdir -p "$(dirname "$VAULT")"
-  if [[ -f "$VAULT" ]]; then
+  if [[ -f "$VAULT" ]] && grep -q "^${1}=" "$VAULT";
+    then
     awk -v k="$1" -v v="$2" 'index($0, k "=") == 1 { print k "=" v; next } { print }' "$VAULT" > "$VAULT.tmp"
     mv "$VAULT.tmp" "$VAULT"
   else
-    printf '%s=%s\n' "$1" "$2" > "$VAULT"
+    printf '%s=%s\n' "$1" "$2" >> "$VAULT"
   fi
   chmod 600 "$VAULT"
 }
