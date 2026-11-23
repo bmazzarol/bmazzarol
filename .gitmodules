@@ -28,3 +28,7 @@
 [submodule "projects/dotnet/Pasted"]
 	path = projects/dotnet/Pasted
 	url = https://github.com/bmazzarol/Pasted.git
+[submodule "projects/dotnet/Firebreak"]
+	path = projects/dotnet/Firebreak
+	url = https://github.com/bmazzarol/Firebreak.git
+	branch = main
