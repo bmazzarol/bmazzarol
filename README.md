@@ -23,6 +23,7 @@ Contributing is still per project, using the usual GitHub workflow.
 | [Icicle](https://github.com/bmazzarol/Icicle) | structured concurrency | [docs](https://bmazzarol.github.io/Icicle/) |
 | [Pasted](https://github.com/bmazzarol/Pasted) | text files baked into the binary | [docs](https://bmazzarol.github.io/Pasted/) |
 | [Polyglot Notebook docfx Plugin](https://github.com/bmazzarol/Polyglot.Notebook.Docfx.Plugin) | notebooks that become documentation | [docs](https://bmazzarol.github.io/Polyglot.Notebook.Docfx.Plugin/) |
+| [Firebreak](https://github.com/bmazzarol/Firebreak) | Result and diagnostics helpers for Roslyn source generators | [docs](https://bmazzarol.github.io/Firebreak/) |
 | [Tuxedo](https://github.com/bmazzarol/Tuxedo) | refined types from predicates | [docs](https://bmazzarol.github.io/Tuxedo/) |
 | [docfx result snippets](https://github.com/bmazzarol/docfx.result-snippets) | executed output in a docfx page | [docs](https://bmazzarol.github.io/docfx.result-snippets/) |
 | [Quacker](https://github.com/bmazzarol/Quacker) | compile time duck typing | - |

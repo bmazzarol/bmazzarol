@@ -71,6 +71,15 @@
       "dotnetVersion": "11.0.x"
     },
     {
+      "name": "Firebreak",
+      "path": "projects/dotnet/Firebreak",
+      "sonarProjectKey": "bmazzarol_Firebreak",
+      "docsProjectPath": "src/Firebreak.Docs",
+      "csProjFileName": "Firebreak.Docs.csproj",
+      "markdownGlobs": "\"**/*.md\" \"src/Firebreak*/**/*.md\" \"src/Firebreak.Docs/**/*.md\" \"!LICENSE.md\" \"!node_modules/**/*.md\" \"!.github/**/*.md\"",
+      "dotnetVersion": "11.0.x"
+    },
+    {
       "name": "Tuxedo",
       "sonarProjectKey": "bmazzarol_Tuxedo",
       "docsProjectPath": "Tuxedo.Docs",

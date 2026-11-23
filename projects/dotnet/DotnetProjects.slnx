@@ -15,6 +15,11 @@
     <Project Path="docfx.result-snippets/Docfx.ResultSnippets.Tests/Docfx.ResultSnippets.Tests.csproj" />
     <Project Path="docfx.result-snippets/Docfx.ResultSnippets/Docfx.ResultSnippets.csproj" />
   </Folder>
+  <Folder Name="/Firebreak/">
+    <Project Path="Firebreak/src/Firebreak.Docs/Firebreak.Docs.csproj" />
+    <Project Path="Firebreak/src/Firebreak.Tests/Firebreak.Tests.csproj" />
+    <Project Path="Firebreak/src/Firebreak/Firebreak.csproj" />
+  </Folder>
   <Folder Name="/Eon/">
     <Project Path="Eon/Eon.Docs/Eon.Docs.csproj" />
     <Project Path="Eon/Eon.Tests/Eon.Tests.csproj" />
